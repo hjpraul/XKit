@@ -1,0 +1,17 @@
+# Uncomment this line to define a global platform for your project
+# platform :ios, '7.0'
+
+target ‘XKit’ do
+    
+    pod 'AFNetworking'
+    pod 'CocoaLumberjack'
+    pod 'IQKeyboardManager'
+    pod 'SDWebImage'
+    pod 'FMDB'
+    pod 'MJRefresh'
+    pod 'MJExtension'
+    pod 'Masonry'
+
+end
+
+
