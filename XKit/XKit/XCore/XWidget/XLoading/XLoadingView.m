@@ -26,39 +26,20 @@ typedef NS_ENUM(NSInteger, LoadingStatus) {
 };
 
 @interface XLoadingView ()
-@property (retain, nonatomic) IBOutlet UIView *contentView;
-@property (retain, nonatomic) IBOutlet UIActivityIndicatorView *activity;
-@property (retain, nonatomic) IBOutlet UIImageView *statusImage;
-@property (retain, nonatomic) IBOutlet UILabel *message;
+@property (strong, nonatomic) IBOutlet UIView *contentView;
+@property (strong, nonatomic) IBOutlet UIActivityIndicatorView *activity;
+@property (strong, nonatomic) IBOutlet UIImageView *statusImage;
+@property (strong, nonatomic) IBOutlet UILabel *message;
 @property (assign, nonatomic) LoadingStatus status;
 @end
 
 @implementation XLoadingView
 
-- (id)init{
-    return [self initWithFrame:CGRectZero];
-}
-
-- (id)initWithFrame:(CGRect)frame{
-    self = [super initWithFrame:frame];
-    if (self) {
-        [self initView];
-    }
-    return self;
-}
-
-- (id)initWithCoder:(NSCoder *)aDecoder {
-    self = [super initWithCoder:aDecoder];
-    if (self) {
-        [self initView];
-    }
-    return self;
+- (void)awakeFromNib {
+    [_contentView x_setCornerRadius:5.0];
 }
 
 #pragma mark - Private Methods
-- (void)initView {
-    [_contentView x_setCornerRadius:3.0];
-}
 
 - (void)setStatus:(LoadingStatus)status {
     _status = status;

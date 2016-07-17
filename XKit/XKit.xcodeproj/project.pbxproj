@@ -55,6 +55,12 @@
 		78AF9F961D3A326C003170F4 /* blank_loading_gif8.png in Resources */ = {isa = PBXBuildFile; fileRef = 78AF9F881D3A326C003170F4 /* blank_loading_gif8.png */; };
 		78AF9F971D3A326C003170F4 /* blank_loading_gif9.png in Resources */ = {isa = PBXBuildFile; fileRef = 78AF9F891D3A326C003170F4 /* blank_loading_gif9.png */; };
 		78AF9F981D3A326C003170F4 /* UIView+XBlank.m in Sources */ = {isa = PBXBuildFile; fileRef = 78AF9F8B1D3A326C003170F4 /* UIView+XBlank.m */; };
+		78EEDF901D3BC8C5000B17B9 /* Splash.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 78EEDF8F1D3BC8C5000B17B9 /* Splash.storyboard */; };
+		78EEDF941D3BCF92000B17B9 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 78EEDF931D3BCF92000B17B9 /* Main.storyboard */; };
+		78EEDF961D3BE80A000B17B9 /* TestLoading.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 78EEDF951D3BE80A000B17B9 /* TestLoading.storyboard */; };
+		78EEDF991D3BEA3D000B17B9 /* DemoHomeVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 78EEDF981D3BEA3D000B17B9 /* DemoHomeVC.m */; };
+		78EEDF9C1D3BEAC4000B17B9 /* TestLoadingVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 78EEDF9B1D3BEAC4000B17B9 /* TestLoadingVC.m */; };
+		78EEDF9F1D3BEBF8000B17B9 /* SplashVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 78EEDF9E1D3BEBF8000B17B9 /* SplashVC.m */; };
 		DA092764AF74930AFB403ACC /* libPods-XKit.a in Frameworks */ = {isa = PBXBuildFile; fileRef = AEECC4CE306E2CCE075DAEA4 /* libPods-XKit.a */; };
 /* End PBXBuildFile section */
 
@@ -140,6 +146,15 @@
 		78AF9F891D3A326C003170F4 /* blank_loading_gif9.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = blank_loading_gif9.png; sourceTree = "<group>"; };
 		78AF9F8A1D3A326C003170F4 /* UIView+XBlank.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+XBlank.h"; sourceTree = "<group>"; };
 		78AF9F8B1D3A326C003170F4 /* UIView+XBlank.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+XBlank.m"; sourceTree = "<group>"; };
+		78EEDF8F1D3BC8C5000B17B9 /* Splash.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Splash.storyboard; sourceTree = "<group>"; };
+		78EEDF931D3BCF92000B17B9 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
+		78EEDF951D3BE80A000B17B9 /* TestLoading.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = TestLoading.storyboard; sourceTree = "<group>"; };
+		78EEDF971D3BEA3D000B17B9 /* DemoHomeVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DemoHomeVC.h; sourceTree = "<group>"; };
+		78EEDF981D3BEA3D000B17B9 /* DemoHomeVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DemoHomeVC.m; sourceTree = "<group>"; };
+		78EEDF9A1D3BEAC4000B17B9 /* TestLoadingVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestLoadingVC.h; sourceTree = "<group>"; };
+		78EEDF9B1D3BEAC4000B17B9 /* TestLoadingVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TestLoadingVC.m; sourceTree = "<group>"; };
+		78EEDF9D1D3BEBF8000B17B9 /* SplashVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SplashVC.h; sourceTree = "<group>"; };
+		78EEDF9E1D3BEBF8000B17B9 /* SplashVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SplashVC.m; sourceTree = "<group>"; };
 		AEECC4CE306E2CCE075DAEA4 /* libPods-XKit.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-XKit.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		DC8CEA825BCDA02EEA83FDE7 /* Pods-XKit.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-XKit.release.xcconfig"; path = "Pods/Target Support Files/Pods-XKit/Pods-XKit.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -190,6 +205,8 @@
 				78AF9E921D2FF71C003170F4 /* Assets.xcassets */,
 				78AF9E971D2FF71C003170F4 /* Info.plist */,
 				78AF9F791D32464D003170F4 /* PrefixHeader.pch */,
+				78EEDF8C1D3BC8AE000B17B9 /* Logic */,
+				78EEDF8D1D3BC8AE000B17B9 /* UI */,
 				78AF9F0A1D323F19003170F4 /* XCore */,
 				78AF9E861D2FF71C003170F4 /* Supporting Files */,
 			);
@@ -396,6 +413,45 @@
 			path = LoadingImage;
 			sourceTree = "<group>";
 		};
+		78EEDF8C1D3BC8AE000B17B9 /* Logic */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Logic;
+			sourceTree = "<group>";
+		};
+		78EEDF8D1D3BC8AE000B17B9 /* UI */ = {
+			isa = PBXGroup;
+			children = (
+				78EEDF8E1D3BC8AE000B17B9 /* Launch */,
+				78EEDF921D3BCF7E000B17B9 /* Main */,
+			);
+			path = UI;
+			sourceTree = "<group>";
+		};
+		78EEDF8E1D3BC8AE000B17B9 /* Launch */ = {
+			isa = PBXGroup;
+			children = (
+				78EEDF8F1D3BC8C5000B17B9 /* Splash.storyboard */,
+				78EEDF9D1D3BEBF8000B17B9 /* SplashVC.h */,
+				78EEDF9E1D3BEBF8000B17B9 /* SplashVC.m */,
+			);
+			path = Launch;
+			sourceTree = "<group>";
+		};
+		78EEDF921D3BCF7E000B17B9 /* Main */ = {
+			isa = PBXGroup;
+			children = (
+				78EEDF931D3BCF92000B17B9 /* Main.storyboard */,
+				78EEDF971D3BEA3D000B17B9 /* DemoHomeVC.h */,
+				78EEDF981D3BEA3D000B17B9 /* DemoHomeVC.m */,
+				78EEDF951D3BE80A000B17B9 /* TestLoading.storyboard */,
+				78EEDF9A1D3BEAC4000B17B9 /* TestLoadingVC.h */,
+				78EEDF9B1D3BEAC4000B17B9 /* TestLoadingVC.m */,
+			);
+			path = Main;
+			sourceTree = "<group>";
+		};
 		C4A91E56F9E30816AA998762 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
@@ -465,15 +521,18 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				78EEDF941D3BCF92000B17B9 /* Main.storyboard in Resources */,
 				78AF9F931D3A326C003170F4 /* blank_loading_gif5.png in Resources */,
 				78AF9F7B1D329462003170F4 /* XLoadingView.xib in Resources */,
 				78AF9F8F1D3A326C003170F4 /* blank_loading_gif11.png in Resources */,
+				78EEDF901D3BC8C5000B17B9 /* Splash.storyboard in Resources */,
 				78AF9F961D3A326C003170F4 /* blank_loading_gif8.png in Resources */,
 				78AF9E931D2FF71C003170F4 /* Assets.xcassets in Resources */,
 				78AF9F6E1D323F1A003170F4 /* fg_line_her@2x.png in Resources */,
 				78AF9F951D3A326C003170F4 /* blank_loading_gif7.png in Resources */,
 				78AF9F8C1D3A326C003170F4 /* blank_loading_gif0.png in Resources */,
 				78AF9F8D1D3A326C003170F4 /* blank_loading_gif1.png in Resources */,
+				78EEDF961D3BE80A000B17B9 /* TestLoading.storyboard in Resources */,
 				78AF9F911D3A326C003170F4 /* blank_loading_gif3.png in Resources */,
 				78AF9F721D323F1A003170F4 /* loading_error@2x.png in Resources */,
 				78AF9F941D3A326C003170F4 /* blank_loading_gif6.png in Resources */,
@@ -543,12 +602,15 @@
 			buildActionMask = 2147483647;
 			files = (
 				78AF9F681D323F1A003170F4 /* UIImage+XEdit.m in Sources */,
+				78EEDF9C1D3BEAC4000B17B9 /* TestLoadingVC.m in Sources */,
 				78AF9F5C1D323F1A003170F4 /* XRefreshTableView.m in Sources */,
 				78AF9F741D323F1A003170F4 /* UIViewController+XLoading.m in Sources */,
 				78AF9F781D323F1A003170F4 /* XToast.m in Sources */,
 				78AF9F611D323F1A003170F4 /* NSObject+XJSON.m in Sources */,
 				78AF9F581D323F1A003170F4 /* NSError+XHTTP.m in Sources */,
+				78EEDF991D3BEA3D000B17B9 /* DemoHomeVC.m in Sources */,
 				78AF9F5B1D323F1A003170F4 /* XRefreshCollectionView.m in Sources */,
+				78EEDF9F1D3BEBF8000B17B9 /* SplashVC.m in Sources */,
 				78AF9F981D3A326C003170F4 /* UIView+XBlank.m in Sources */,
 				78AF9E8B1D2FF71C003170F4 /* AppDelegate.m in Sources */,
 				78AF9F761D323F1A003170F4 /* XSinglePicPicker.m in Sources */,
@@ -664,6 +726,7 @@
 			baseConfigurationReference = 31F19803E600F7CBB52809BE /* Pods-XKit.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = "Brand Assets";
 				GCC_PREFIX_HEADER = XKit/PrefixHeader.pch;
 				INFOPLIST_FILE = XKit/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
@@ -678,6 +741,7 @@
 			baseConfigurationReference = DC8CEA825BCDA02EEA83FDE7 /* Pods-XKit.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = "Brand Assets";
 				GCC_PREFIX_HEADER = XKit/PrefixHeader.pch;
 				INFOPLIST_FILE = XKit/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;

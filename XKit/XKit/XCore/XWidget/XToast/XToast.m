@@ -31,7 +31,7 @@
         UIFont *font = [UIFont boldSystemFontOfSize:FONT_SIZE];
         CGRect textRect = [text boundingRectWithSize:CGSizeMake([XUtil x_screenWidth]-EDG_OFFSET*4, MAXFLOAT)
                                              options:NSStringDrawingUsesFontLeading|NSStringDrawingTruncatesLastVisibleLine|NSStringDrawingUsesLineFragmentOrigin
-                                          attributes:@{NSFontAttributeName:[UIFont systemFontOfSize:FONT_SIZE]}
+                                          attributes:@{NSFontAttributeName:font}
                                              context:NULL];
         CGSize textSize = textRect.size;
 
@@ -78,7 +78,7 @@
 }
 
 - (void)setDuration:(CGFloat) duration{
-    self.duration = duration;
+    _duration = duration;
 }
 
 -(void)showAnimation{
