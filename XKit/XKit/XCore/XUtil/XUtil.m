@@ -11,84 +11,84 @@
 
 @implementation XUtil
 // 目录快捷方式
-+ (NSString *)x_appPath{
++ (NSString *)appPath{
     NSArray *paths = NSSearchPathForDirectoriesInDomains(NSApplicationDirectory, NSUserDomainMask, YES);
     return [paths firstObject];
 }
 
-+ (NSString *)x_docPath{
++ (NSString *)docPath{
     NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
     return [paths firstObject];
 }
 
-+ (NSString *)x_cachePath{
++ (NSString *)cachePath{
     NSArray * paths = NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES);
     return [paths firstObject];
 }
 
-+ (NSString *)x_tempPath{
++ (NSString *)tempPath{
     NSString *path = NSTemporaryDirectory();
     return path;
 }
 
 // 客户端相关参数快捷方式
-+ (NSString *)x_appVersion {
++ (NSString *)appVersion {
     return [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleShortVersionString"];
 }
 
-+ (NSString *)x_appBuild {
++ (NSString *)appBuild {
     return [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleVersion"];
 }
 
-+ (NSString *)x_appName {
++ (NSString *)appName {
     return [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleDisplayName"];
 }
 
-+ (NSString *)x_appBundleID {
++ (NSString *)appBundleID {
     return [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleIdentifier"];
 }
 
-+ (id)x_objectOfInfoForKey:(NSString *)key {
++ (id)objectOfInfoPlistForKey:(NSString *)key {
     return [[[NSBundle mainBundle] infoDictionary] objectForKey:key];
 }
 
 // 设备信息相关
-+ (NSString *)x_systemVersion {
++ (NSString *)systemVersion {
     return [[UIDevice currentDevice] systemVersion];
 }
 
-+ (NSString *)x_systemName {
++ (NSString *)systemName {
     return [[UIDevice currentDevice] systemName];
 }
 
-+ (BOOL)x_isIOS8Above {
++ (BOOL)isIOS8Above {
     return ([[[[[UIDevice currentDevice] systemVersion] componentsSeparatedByString:@"."] objectAtIndex:0] intValue] >= 8);
 }
 
-+ (BOOL)x_isIOS9Above {
++ (BOOL)isIOS9Above {
     return ([[[[[UIDevice currentDevice] systemVersion] componentsSeparatedByString:@"."] objectAtIndex:0] intValue] >= 9);
 }
 
 // Bundle相关（路径）
-+ (NSString *)x_pngPathOfName:(NSString *)name {
++ (NSString *)pngPathOfName:(NSString *)name {
     return [[NSBundle mainBundle] pathForResource:name ofType:@"png"];
 }
 
-+ (NSString *)x_jpgPathOfName:(NSString *)name {
++ (NSString *)jpgPathOfName:(NSString *)name {
     return [[NSBundle mainBundle] pathForResource:name ofType:@"jpg"];
 }
 
-+ (NSString *)x_bundleFilePathOfName:(NSString *)name
++ (NSString *)bundleFilePathOfName:(NSString *)name
                                ext:(NSString *)extension {
     return [[NSBundle mainBundle] pathForResource:name ofType:extension];
 }
 
 // 坐标相关
-+ (CGFloat)x_screenWidth {
++ (CGFloat)screenWidth {
     return [UIScreen mainScreen].bounds.size.width;
 }
 
-+ (CGFloat)x_screenHeight {
++ (CGFloat)screenHeight {
     return [UIScreen mainScreen].bounds.size.height;
 }
 

@@ -29,7 +29,7 @@
         self.text = [text copy];
         
         UIFont *font = [UIFont boldSystemFontOfSize:FONT_SIZE];
-        CGRect textRect = [text boundingRectWithSize:CGSizeMake([XUtil x_screenWidth]-EDG_OFFSET*4, MAXFLOAT)
+        CGRect textRect = [text boundingRectWithSize:CGSizeMake([XUtil screenWidth]-EDG_OFFSET*4, MAXFLOAT)
                                              options:NSStringDrawingUsesFontLeading|NSStringDrawingTruncatesLastVisibleLine|NSStringDrawingUsesLineFragmentOrigin
                                           attributes:@{NSFontAttributeName:font}
                                              context:NULL];
