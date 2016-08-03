@@ -41,7 +41,7 @@
 }
 
 + (NSString *)x_appName {
-    return [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleDisplayName"];
+    return [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleName"];
 }
 
 + (NSString *)x_appBundleID {
