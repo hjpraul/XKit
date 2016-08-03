@@ -9,7 +9,7 @@
 #import "XDBManager.h"
 #import "FMDB.h"
 
-#define DB_PATH [[XUtil x_docPath] stringByAppendingPathComponent:@"APPData.db"]
+#define DB_PATH [[XUtil docPath] stringByAppendingPathComponent:@"APPData.db"]
 
 @implementation XDBManager
 + (NSString *)columTypeStringWithClass:(Class)cls {
