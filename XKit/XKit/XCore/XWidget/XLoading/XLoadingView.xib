@@ -13,7 +13,7 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="y2J-sB-a51">
-                    <rect key="frame" x="65" y="222" width="190" height="124"/>
+                    <rect key="frame" x="65" y="206" width="190" height="124"/>
                     <subviews>
                         <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="white" translatesAutoresizingMaskIntoConstraints="NO" id="aKN-JL-6Vq">
                             <rect key="frame" x="85" y="8" width="20" height="20"/>
@@ -43,12 +43,12 @@
                     </constraints>
                 </view>
             </subviews>
-            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+            <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.20000000000000001" colorSpace="calibratedRGB"/>
             <constraints>
                 <constraint firstItem="y2J-sB-a51" firstAttribute="width" relation="lessThanOrEqual" secondItem="iN0-l3-epB" secondAttribute="width" multiplier="0.6" id="35U-el-WiQ"/>
                 <constraint firstItem="y2J-sB-a51" firstAttribute="height" relation="lessThanOrEqual" secondItem="iN0-l3-epB" secondAttribute="height" multiplier="0.7" id="LYk-fa-Fp5"/>
                 <constraint firstItem="y2J-sB-a51" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="MdZ-1E-Gej"/>
-                <constraint firstItem="y2J-sB-a51" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="Z9K-F0-H2S"/>
+                <constraint firstItem="y2J-sB-a51" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" constant="-16" id="Z9K-F0-H2S"/>
             </constraints>
             <nil key="simulatedStatusBarMetrics"/>
             <nil key="simulatedTopBarMetrics"/>
