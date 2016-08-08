@@ -1,8 +1,8 @@
 //
 //  XRefreshCollectionView.m
-//  DNF
+//  XKit
 //
-//  Created by Jayla on 16/2/19.
+//  Created by hjpraul on 16/7/18.
 //  Copyright © 2016年 hjpraul. All rights reserved.
 //
 
@@ -34,10 +34,8 @@
 - (void)awakeFromNib {
     self.pageSize = 20;
     self.pageIndex = 0;
-    self.allowShowBlank = YES;
-    self.blankImage = [UIImage imageNamed:@"login_logo"];
-    self.blankTitle = nil;
-    self.blankMessage = @"无数据";
+    self.loadWithBlank = YES;
+    self.emptyMessage = @"无数据";
 }
 
 - (void)setRefreshDelegate:(id<XRefreshCollectionViewDelegate>)refreshDelegate {
@@ -73,9 +71,9 @@
                 [weakSelf.mj_footer endRefreshing];
             }
             
-            if (weakSelf.allowShowBlank && weakSelf.dataArray.count==0) {
+            if (weakSelf.dataArray.count==0) {
                 weakSelf.mj_footer.hidden = YES;
-                [weakSelf showBlankWithImage:weakSelf.blankImage title:weakSelf.blankTitle message:weakSelf.blankMessage action:nil];
+                [weakSelf showBlankWithType:kBlankTypeNoInfo message:weakSelf.emptyMessage action:nil];
             } else {
                 weakSelf.mj_footer.hidden = NO;
                 [weakSelf dismissBlank];
@@ -83,10 +81,10 @@
         } failure:^(NSError *error) {
             [weakSelf.mj_header endRefreshing];
             
-            NSString *message = error.localizedDescription?:weakSelf.blankMessage;
-            if (weakSelf.allowShowBlank && weakSelf.dataArray.count==0) {
+            NSString *message = error.localizedDescription?:weakSelf.emptyMessage;
+            if (weakSelf.dataArray.count==0) {
                 weakSelf.mj_footer.hidden = YES;
-                [weakSelf showBlankWithImage:weakSelf.blankImage title:weakSelf.blankTitle message:message action:nil];
+                [weakSelf showBlankWithType:kBlankTypeFailed message:message action:nil];
             } else {
                 weakSelf.mj_footer.hidden = NO;
                 [weakSelf dismissBlank];
@@ -117,9 +115,9 @@
                 [weakSelf.mj_footer endRefreshing];
             }
             
-            if (weakSelf.allowShowBlank && weakSelf.dataArray.count==0) {
+            if (weakSelf.dataArray.count==0) {
                 weakSelf.mj_footer.hidden = YES;
-                [weakSelf showBlankWithImage:weakSelf.blankImage title:weakSelf.blankTitle message:weakSelf.blankMessage action:nil];
+                [weakSelf showBlankWithType:kBlankTypeNoInfo message:weakSelf.emptyMessage action:nil];
             } else {
                 weakSelf.mj_footer.hidden = NO;
                 [weakSelf dismissBlank];
@@ -127,10 +125,10 @@
         } failure:^(NSError *error) {
             [weakSelf.mj_footer endRefreshing];
             
-            NSString *message = error.localizedDescription?:weakSelf.blankMessage;
-            if (weakSelf.allowShowBlank && weakSelf.dataArray.count==0) {
+            NSString *message = error.localizedDescription?:weakSelf.emptyMessage;
+            if (weakSelf.dataArray.count==0) {
                 weakSelf.mj_footer.hidden = YES;
-                [weakSelf showBlankWithImage:weakSelf.blankImage title:weakSelf.blankTitle message:message action:nil];
+                [weakSelf showBlankWithType:kBlankTypeFailed message:message action:nil];
             } else {
                 weakSelf.mj_footer.hidden = NO;
                 [weakSelf dismissBlank];
@@ -146,7 +144,11 @@
 /**********************************************************************/
 
 - (void)refreshData {
-    [self.mj_header beginRefreshing];
+    if (self.loadWithBlank) {
+        BLOCK_SAFE(self.mj_header.refreshingBlock)();
+    } else {
+        [self.mj_header beginRefreshing];
+    }
 }
 
 @end

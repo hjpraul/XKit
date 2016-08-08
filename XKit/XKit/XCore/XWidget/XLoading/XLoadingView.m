@@ -9,9 +9,9 @@
 #import "XLoadingView.h"
 #define TAG_LOADINGVIEW     191918
 
-#define failedImage     ([UIImage imageNamed:@""])
-#define successImage    ([UIImage imageNamed:@""])
-#define infoImage       ([UIImage imageNamed:@""])
+#define failedImage     ([UIImage imageNamed:@"icon_loading_failed"])
+#define successImage    ([UIImage imageNamed:@"icon_loading_success"])
+#define infoImage       ([UIImage imageNamed:@"icon_loading_info"])
 
 #define minDelayTime    (2.0)
 #define maxDelayTime    (8.0)

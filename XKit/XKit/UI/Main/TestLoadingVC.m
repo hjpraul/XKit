@@ -51,9 +51,9 @@
             });
         }break;
         case 2:{
-            [self.tableView showBlankWithType:kBlankTypeLoading title:@"加载中..." message:@"正在全力加载～～" action:nil];
+            [self.tableView showBlankWithType:kBlankTypeLoading message:@"加载中..." action:nil];
             dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(3 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-                [self.tableView showBlankWithImage:nil title:@"加载完成" message:@"点击输出toast" action:^{
+                [self.tableView showBlankWithImage:nil message:@"加载完成加载完成加载完成加载完成加载完成加载完成加载完成加载完成" action:^{
                     [@"你点我做甚！！" x_toast];
                 }];
             });

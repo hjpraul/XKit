@@ -1,8 +1,8 @@
 //
 //  XRefreshTableView.m
-//  DNF
+//  XKit
 //
-//  Created by Jayla on 16/2/3.
+//  Created by hjpraul on 16/7/18.
 //  Copyright © 2016年 hjpraul. All rights reserved.
 //
 
@@ -42,8 +42,7 @@
     self.pageSize = 10;
     self.pageIndex = 0;
     self.loadWithBlank = YES;
-    self.blankTitle = nil;
-    self.blankMessage = @"无数据";
+    self.emptyMessage = @"无数据";
 }
 
 - (void)setRefreshDelegate:(id<XRefreshTableViewDelegate>)refreshDelegate {
@@ -81,7 +80,7 @@
             
             if (weakSelf.dataArray.count==0) {
                 weakSelf.mj_footer.hidden = YES;
-                [weakSelf showBlankWithType:kBlankTypeNoInfo title:weakSelf.blankTitle message:weakSelf.blankMessage action:^{
+                [weakSelf showBlankWithType:kBlankTypeNoInfo message:weakSelf.emptyMessage action:^{
                     [weakSelf refreshData];
                 }];
             } else {
@@ -91,10 +90,10 @@
         } failure:^(NSError *error) {
             [weakSelf.mj_header endRefreshing];
             
-            NSString *message = error.localizedDescription?:weakSelf.blankMessage;
+            NSString *message = error.localizedDescription?:weakSelf.emptyMessage;
             if (weakSelf.dataArray.count==0) {
                 weakSelf.mj_footer.hidden = YES;
-                [weakSelf showBlankWithType:kBlankTypeNoInfo title:weakSelf.blankTitle message:weakSelf.blankMessage action:^{
+                [weakSelf showBlankWithType:kBlankTypeFailed message:message action:^{
                     [weakSelf refreshData];
                 }];
             } else {
@@ -129,7 +128,7 @@
             
             if (weakSelf.dataArray.count==0) {
                 weakSelf.mj_footer.hidden = YES;
-                [weakSelf showBlankWithType:kBlankTypeNoInfo title:weakSelf.blankTitle message:weakSelf.blankMessage action:^{
+                [weakSelf showBlankWithType:kBlankTypeNoInfo message:weakSelf.emptyMessage action:^{
                     [weakSelf refreshData];
                 }];
             } else {
@@ -139,10 +138,10 @@
         } failure:^(NSError *error) {
             [weakSelf.mj_footer endRefreshing];
             
-            NSString *message = error.localizedDescription?:weakSelf.blankMessage;
+            NSString *message = error.localizedDescription?:weakSelf.emptyMessage;
             if (weakSelf.dataArray.count==0) {
                 weakSelf.mj_footer.hidden = YES;
-                [weakSelf showBlankWithType:kBlankTypeNoInfo title:weakSelf.blankTitle message:weakSelf.blankMessage action:^{
+                [weakSelf showBlankWithType:kBlankTypeNoInfo message:message action:^{
                     [weakSelf refreshData];
                 }];
             } else {

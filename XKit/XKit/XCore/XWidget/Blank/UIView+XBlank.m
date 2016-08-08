@@ -1,28 +1,26 @@
 //
 //  UIView+Blank.m
-//  DNF
+//  XKit
 //
-//  Created by Jayla on 16/2/23.
+//  Created by hjpraul on 16/7/18.
 //  Copyright © 2016年 hjpraul. All rights reserved.
 //
 
 #import "UIView+XBlank.h"
 
 #define IMAGE_TAG   (8709141)
-#define TITLE_TAG   (8709142)
-#define MESSAGE_TAG (8709143)
-#define BUTTON_TAG  (8709144)
+#define MESSAGE_TAG (8709142)
+#define BUTTON_TAG  (8709143)
 
 @implementation UIView (Blank)
 
 - (void)showBlankWithImage:(UIImage *)image
-                     title:(NSString *)title
                    message:(NSString *)message
                     action:(void (^)(void))action {
     __weak typeof(self) weakSelf = self;
     
     UIImageView *imageView = [self viewWithTag:IMAGE_TAG];
-    if (image) {
+    if (image && !CGSizeEqualToSize(image.size, CGSizeZero)) {
         if (imageView == nil) {
             imageView = [[UIImageView alloc] init];
             imageView.tag = IMAGE_TAG;
@@ -34,42 +32,11 @@
         
         [imageView mas_remakeConstraints:^(MASConstraintMaker *make) {
             make.centerX.equalTo(weakSelf);
-            make.bottom.equalTo(weakSelf.mas_centerY).offset(-20);
+            make.bottom.equalTo(weakSelf.mas_centerY).offset(-32);
         }];
     } else {
         [imageView removeFromSuperview];
         imageView = nil;
-    }
-    
-    UILabel *titleLabel = [self viewWithTag:TITLE_TAG];
-    if (title) {
-        if (titleLabel == nil) {
-            titleLabel = [[UILabel alloc] init];
-            titleLabel.tag = TITLE_TAG;
-            titleLabel.backgroundColor = [UIColor clearColor];
-            titleLabel.textColor = [UIColor lightGrayColor];
-            titleLabel.textAlignment = NSTextAlignmentCenter;
-            titleLabel.font = [UIFont systemFontOfSize:16];
-            [self insertSubview:titleLabel atIndex:0];
-        }
-        titleLabel.text= title;
-        
-        if (imageView) {
-            [titleLabel mas_remakeConstraints:^(MASConstraintMaker *make) {
-                make.centerX.equalTo(weakSelf);
-                make.top.equalTo(imageView.mas_bottom).offset(20);
-                make.left.lessThanOrEqualTo(weakSelf).offset(20);
-            }];
-        } else {
-            [titleLabel mas_remakeConstraints:^(MASConstraintMaker *make) {
-                make.centerX.equalTo(weakSelf);
-                make.bottom.equalTo(weakSelf.mas_centerY);
-                make.left.lessThanOrEqualTo(weakSelf).offset(20);
-            }];
-        }
-    } else {
-        [titleLabel removeFromSuperview];
-        titleLabel = nil;
     }
 
     UILabel *messageLabel = [self viewWithTag:MESSAGE_TAG];
@@ -81,27 +48,24 @@
             messageLabel.textColor = [UIColor lightGrayColor];
             messageLabel.textAlignment = NSTextAlignmentCenter;
             messageLabel.font = [UIFont systemFontOfSize:15];
+            messageLabel.numberOfLines = 0;
             [self insertSubview:messageLabel atIndex:0];
         }
         messageLabel.text= message;
         
-        if (titleLabel) {
+        if (imageView) {
             [messageLabel mas_makeConstraints:^(MASConstraintMaker *make) {
                 make.centerX.equalTo(weakSelf);
-                make.top.equalTo(titleLabel.mas_bottom).offset(8);
-                make.left.lessThanOrEqualTo(weakSelf).offset(20);
-            }];
-        } else if (imageView) {
-            [messageLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-                make.centerX.equalTo(weakSelf);
-                make.top.equalTo(imageView.mas_bottom).offset(20);
-                make.left.lessThanOrEqualTo(weakSelf).offset(20);
+                make.top.equalTo(imageView.mas_bottom).offset(8);
+                make.left.greaterThanOrEqualTo(weakSelf).offset(16);
+                make.right.lessThanOrEqualTo(weakSelf).offset(-16);
             }];
         } else {
             [messageLabel mas_remakeConstraints:^(MASConstraintMaker *make) {
                 make.centerX.equalTo(weakSelf);
                 make.bottom.equalTo(weakSelf.mas_centerY);
-                make.left.lessThanOrEqualTo(weakSelf).offset(20);
+                make.left.greaterThanOrEqualTo(weakSelf).offset(16);
+                make.right.lessThanOrEqualTo(weakSelf).offset(-16);
             }];
         }
     } else {
@@ -132,7 +96,9 @@
     objc_setAssociatedObject(self, "__blankAction__", action, OBJC_ASSOCIATION_COPY);
 }
 
-- (void)showBlankWithType:(BlankType)type title:(NSString *)title message:(NSString *)message action:(void (^)(void))action {
+- (void)showBlankWithType:(BlankType)type
+                  message:(NSString *)message
+                   action:(void (^)(void))action {
     UIImage *image = nil;
     switch (type) {
         case kBlankTypeLoading:{
@@ -148,15 +114,12 @@
             image = [UIImage imageNamed:@"空白提示-缺省"];
         }break;
     }
-    [self showBlankWithImage:image title:title message:message action:action];
+    [self showBlankWithImage:image message:message action:action];
 }
 
 - (void)dismissBlank {
     UIImageView *imageView = [self viewWithTag:IMAGE_TAG];
     [imageView removeFromSuperview];
-    
-    UILabel *titleLabel = [self viewWithTag:TITLE_TAG];
-    [titleLabel removeFromSuperview];
     
     UILabel *messageLabel = [self viewWithTag:MESSAGE_TAG];
     [messageLabel removeFromSuperview];

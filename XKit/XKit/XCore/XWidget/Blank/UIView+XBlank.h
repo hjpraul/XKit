@@ -1,8 +1,8 @@
 //
 //  UIView+Blank.h
-//  DNF
+//  XKit
 //
-//  Created by Jayla on 16/2/23.
+//  Created by hjpraul on 16/7/18.
 //  Copyright © 2016年 hjpraul. All rights reserved.
 //
 
@@ -17,12 +17,10 @@ typedef enum {
 @interface UIView (Blank)
 
 - (void)showBlankWithImage:(UIImage *)image
-                     title:(NSString *)title
                    message:(NSString *)message
                     action:(void (^)(void))action;
 
 - (void)showBlankWithType:(BlankType)type
-                    title:(NSString *)title
                   message:(NSString *)message
                    action:(void (^)(void))action;
 

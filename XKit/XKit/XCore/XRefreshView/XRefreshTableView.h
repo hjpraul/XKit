@@ -1,8 +1,8 @@
 //
 //  XRefreshTableView.h
-//  DNF
+//  XKit
 //
-//  Created by Jayla on 16/2/3.
+//  Created by hjpraul on 16/7/18.
 //  Copyright © 2016年 hjpraul. All rights reserved.
 //
 
@@ -14,10 +14,9 @@
 @property (strong, nonatomic) NSMutableArray *dataArray;
 @property (assign, nonatomic) NSUInteger pageSize;
 @property (assign, nonatomic) NSUInteger pageIndex;
-@property (assign, nonatomic) BOOL loadWithBlank;
 
-@property (strong, nonatomic) NSString *blankTitle;
-@property (strong, nonatomic) NSString *blankMessage;
+@property (assign, nonatomic) BOOL loadWithBlank;
+@property (strong, nonatomic) NSString *emptyMessage;
 
 - (void)refreshData;
 @end
