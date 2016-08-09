@@ -1,5 +1,5 @@
 //
-//  BSAlertView.h
+//  XBSAlertView.h
 //  XKit
 //
 //  Created by hjpraul on 13-8-18.
@@ -37,7 +37,7 @@ typedef NS_ENUM(NSInteger, XAlertViewPosition){
     XAlertViewPositionCenter,
 };
 
-@interface BSAlertView : UIView
+@interface XBSAlertView : UIView
 @property(nonatomic, assign) BOOL enableClickBGToDismiss;
 @property(nonatomic, assign) XAlertViewPresentationStyle presentationStyle;
 @property(nonatomic, assign) XAlertViewDismissalStyle dismissalStyle;

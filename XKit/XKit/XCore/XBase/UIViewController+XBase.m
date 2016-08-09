@@ -1,14 +1,14 @@
 //
-//  UIViewController+Base.m
-//  LianghuaJifen
+//  UIViewController+XBase.m
+//  XKit
 //
 //  Created by hjpraul on 16/4/17.
 //  Copyright © 2016年 hjpraul. All rights reserved.
 //
 
-#import "UIViewController+Base.h"
+#import "UIViewController+XBase.h"
 
-@implementation UIViewController (Base)
+@implementation UIViewController (XBase)
 - (void)customViewDidLoad {
     //这个属性属于UIExtendedEdge类型，它可以单独指定矩形的四条边，也可以单独指定、指定全部、全部不指定。
     //指定视图的哪条边需要扩展，不用理会操作栏的透明度。这个属性的默认值是UIRectEdgeAll。
@@ -22,9 +22,9 @@
     //如果有tabBarController，此设置会在设置了hidesBottomBarWhenPushed的时候让push变得更顺滑。
     self.tabBarController.tabBar.translucent = NO;
 
-//    self.navigationController.navigationBar.backgroundColor = [UIColor clearColor];
-//    [self.navigationController.navigationBar setBarTintColor:[UIColor clearColor]];
-    [self.navigationController.navigationBar setBackgroundImage:[UIImage imageNamed:@"bg_nav"] forBarMetrics:UIBarMetricsDefault];
+    self.navigationController.navigationBar.backgroundColor = [UIColor clearColor];
+    [self.navigationController.navigationBar setBarTintColor:[UIColor clearColor]];
+//    [self.navigationController.navigationBar setBackgroundImage:[UIImage imageNamed:@"bg_nav"] forBarMetrics:UIBarMetricsDefault];
     [self.navigationController.navigationBar setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:[UIFont boldSystemFontOfSize:18],NSFontAttributeName,[UIColor blackColor],NSForegroundColorAttributeName,nil]];
 }
 

@@ -1,12 +1,12 @@
 //
-//  BSAlertView.m
+//  XBSAlertView.m
 //  XKit
 //
 //  Created by hjpraul on 13-8-18.
 //  Copyright (c) 2013年 hjpraul. All rights reserved.
 //
 
-#import "BSAlertView.h"
+#import "XBSAlertView.h"
 
 #define ANIMATION_DURATION  (0.3f)
 #define DELAY_DURATION      (0.0f)
@@ -14,12 +14,12 @@
 typedef void (^AnimationBlock)();
 typedef void (^AnimationCompletionBlock)(BOOL);
 
-@interface BSAlertView()
+@interface XBSAlertView()
 @property (nonatomic, retain) UIWindow *alertWindow;
 @property (nonatomic, retain) UIImageView *dimImageView;
 @end
 
-@implementation BSAlertView
+@implementation XBSAlertView
 
 - (id)init{
     self = [super init];

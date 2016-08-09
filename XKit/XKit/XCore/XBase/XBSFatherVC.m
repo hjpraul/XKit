@@ -1,18 +1,18 @@
 //
-//  BSFatherVC.m
-//  PalmSchool
+//  XBSFatherVC.m
+//  XKit
 //
 //  Created by hjpraul on 16/6/11.
 //  Copyright © 2016年 hjpraul. All rights reserved.
 //
 
-#import "BSFatherVC.h"
+#import "XBSFatherVC.h"
 
-@interface BSFatherVC ()
+@interface XBSFatherVC ()
 @property (strong, nonatomic) UIView *containerView;  // TODO:这里理论上可以用weak吧？
 @end
 
-@implementation BSFatherVC
+@implementation XBSFatherVC
 
 - (void)viewDidLoad {
     [super viewDidLoad];

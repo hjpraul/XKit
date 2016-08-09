@@ -1,6 +1,6 @@
 //
-//  UIViewController+Base.h
-//  LianghuaJifen
+//  UIViewController+XBase.h
+//  XKit
 //
 //  Created by hjpraul on 16/4/17.
 //  Copyright © 2016年 hjpraul. All rights reserved.
@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface UIViewController (Base)
+@interface UIViewController (XBase)
 // ViewDidLoad初始化公共设置
 - (void)customViewDidLoad;
 

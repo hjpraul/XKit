@@ -1,23 +1,30 @@
 //
-//  BSVC.m
-//  LianghuaJifen
+//  XBSTableVC.m
+//  XKit
 //
 //  Created by hjpraul on 16/4/17.
 //  Copyright © 2016年 hjpraul. All rights reserved.
 //
 
-#import "BSVC.h"
-#import "UIViewController+Base.h"
+#import "XBSTableVC.h"
+#import "UIViewController+XBase.h"
 
-@interface BSVC ()
+@interface XBSTableVC ()
 
 @end
 
-@implementation BSVC
+@implementation XBSTableVC
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+
+    [super viewDidLoad];
     [self customViewDidLoad];
+    // Uncomment the following line to preserve selection between presentations.
+    // self.clearsSelectionOnViewWillAppear = NO;
+    
+    // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
+    // self.navigationItem.rightBarButtonItem = self.editButtonItem;
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -30,16 +37,6 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
-
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 - (void)setUseCommonBackBar:(BOOL)useCommonBackBar {
     if (useCommonBackBar) {

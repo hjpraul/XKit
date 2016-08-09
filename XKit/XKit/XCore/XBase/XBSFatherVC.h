@@ -1,14 +1,14 @@
 //
-//  BSFatherVC.h
-//  PalmSchool
+//  XBSFatherVC.h
+//  XKit
 //
 //  Created by hjpraul on 16/6/11.
 //  Copyright © 2016年 hjpraul. All rights reserved.
 //
 
-#import "BSVC.h"
+#import "XBSVC.h"
 
-@interface BSFatherVC : BSVC
+@interface XBSFatherVC : XBSVC
 @property (strong, nonatomic, readonly) NSArray *childVcs;
 /**
  *  @brief 初始化设置
