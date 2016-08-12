@@ -9,12 +9,8 @@
 #import <UIKit/UIKit.h>
 
 @interface UIViewController (XBase)
-// ViewDidLoad初始化公共设置
-- (void)customViewDidLoad;
 
-// 设置返回按钮可见
-- (void)setBackBarVisible:(BOOL)isVisible;
-
+#pragma mark - Public Method
 /**
  *  @brief 设置导航栏左键
  *
@@ -57,5 +53,18 @@
  *  @brief 缺省导航栏返回按钮响应
  */
 - (void)defaultBackBarAction;
+
+#pragma mark - Customer Setting (in this project)
+/**
+ *  @brief 用户初始化
+ */
+- (void)customViewDidLoad;
+
+/**
+ *  @brief 默认返回按钮是否可见
+ *
+ *  @param isVisible 是否可见
+ */
+- (void)setBackBarVisible:(BOOL)isVisible;
 
 @end

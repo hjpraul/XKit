@@ -243,7 +243,6 @@ typedef void (^AnimationCompletionBlock)(BOOL);
 }
 
 #pragma mark - Public Method
-
 - (void)show{
     [self showWithStyle:self.presentationStyle];
 }
