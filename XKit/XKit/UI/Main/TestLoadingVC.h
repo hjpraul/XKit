@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface TestLoadingVC : UITableViewController
+@interface TestLoadingVC : XBSTableVC
 
 @end

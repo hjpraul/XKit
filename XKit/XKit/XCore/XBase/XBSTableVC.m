@@ -14,11 +14,9 @@
 @end
 
 @implementation XBSTableVC
-
 - (void)viewDidLoad {
     [super viewDidLoad];
 
-    [super viewDidLoad];
     [self customViewDidLoad];
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;

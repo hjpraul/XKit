@@ -22,122 +22,112 @@
     //如果有tabBarController，此设置会在设置了hidesBottomBarWhenPushed的时候让push变得更顺滑。
     self.tabBarController.tabBar.translucent = NO;
 
-    self.navigationController.navigationBar.backgroundColor = [UIColor clearColor];
-    [self.navigationController.navigationBar setBarTintColor:[UIColor clearColor]];
+    self.navigationController.navigationBar.backgroundColor = [UIColor whiteColor];
+    [self.navigationController.navigationBar setBarTintColor:[UIColor whiteColor]];
 //    [self.navigationController.navigationBar setBackgroundImage:[UIImage imageNamed:@"bg_nav"] forBarMetrics:UIBarMetricsDefault];
     [self.navigationController.navigationBar setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:[UIFont boldSystemFontOfSize:18],NSFontAttributeName,[UIColor blackColor],NSForegroundColorAttributeName,nil]];
 }
 
-// 设置返回键
-#define NAV_BAR_ITEM_SPACE  (16)
-#define STATUS_BAR_HEIGHT   (20)
-#define NAV_BAR_HEIGHT      (44)
-- (void)setBackBarVisible:(BOOL)isVisible{
-    if (!isVisible) {
-        [self.navigationItem setLeftBarButtonItem:nil];
-        return;
-    }
-    UIImage *backBarImg = [UIImage imageNamed:@"icon_nav_back"];
-    UIImage *backBarBGImg = [UIImage imageNamed:@"bg_nav_bar_left"];
-    CGRect buttonFrame = CGRectMake(0,
-                                    STATUS_BAR_HEIGHT/2,
-                                    backBarBGImg.size.width+8,
-                                    backBarBGImg.size.height);
-    UIButton *backButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    backButton.frame = buttonFrame;
-    [backButton setAdjustsImageWhenHighlighted:YES];
-    [backButton setImage:backBarImg forState:UIControlStateNormal];
-    [backButton setBackgroundImage:backBarBGImg forState:UIControlStateNormal];
-    [backButton addTarget:self action:@selector(bsBackBarClicked) forControlEvents:UIControlEventTouchUpInside];
+- (UIBarButtonItem *)creatBarItemByTitle:(NSString *)title
+                                   image:(UIImage *)image
+                                 bgImage:(UIImage *)bgImage
+                                    size:(CGSize)size
+                                  action:(SEL)action
+                                  button:(UIButton **)button {
+    CGRect frame = CGRectMake(0,0,size.width,size.height);
+    UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
+    btn.frame = frame;
+    [btn setTitle:title forState:UIControlStateNormal];
+    [btn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+    btn.titleLabel.font = [UIFont systemFontOfSize:15];
+    btn.titleLabel.adjustsFontSizeToFitWidth = YES;
+    [btn setImage:image forState:UIControlStateNormal];
+    [btn setBackgroundImage:bgImage forState:UIControlStateNormal];
+    [btn setAdjustsImageWhenHighlighted:YES];
+    [btn addTarget:self action:action forControlEvents:UIControlEventTouchUpInside];
+    *button = btn;
 
-    UIView *backView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, buttonFrame.size.width, NAV_BAR_HEIGHT)];
-    backView.backgroundColor = [UIColor clearColor];
-    [backView addSubview:backButton];
+    UIView *barView = [[UIView alloc] initWithFrame:frame];
+    barView.backgroundColor = [UIColor clearColor];
+    [barView addSubview:btn];
 
-    UIBarButtonItem *backBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:backView];
-    [backBarButtonItem setBackgroundVerticalPositionAdjustment:0.0f forBarMetrics:UIBarMetricsDefault];
-    
-    UIBarButtonItem *flexSpacer = [[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemFixedSpace target:self action:nil];
-    flexSpacer.width = -NAV_BAR_ITEM_SPACE;
-    [self.navigationItem setLeftBarButtonItems:@[flexSpacer,backBarButtonItem]];
+    UIBarButtonItem *barItem = [[UIBarButtonItem alloc] initWithCustomView:barView];
+    [barItem setBackgroundVerticalPositionAdjustment:0.0f forBarMetrics:UIBarMetricsDefault];
+
+    return barItem;
 }
 
-// 设置左边按钮
+#pragma mark - Public Method
 - (UIButton *)setLeftBarByTitle:(NSString *)title
                           image:(UIImage *)image
+                        bgImage:(UIImage *)bgImage
+                     leftOffset:(CGFloat)leftOffset
+                           size:(CGSize)size
                          action:(SEL)action {
-    UIImage *leftBarBGImg = [UIImage imageNamed:@"bg_nav_bar_left"];
-    CGRect buttonFrame = CGRectMake(0,
-                                    STATUS_BAR_HEIGHT/2,
-                                    leftBarBGImg.size.width+8,
-                                    leftBarBGImg.size.height);
-    UIButton *leftButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    leftButton.frame = buttonFrame;
-    [leftButton setTitle:title forState:UIControlStateNormal];
-    [leftButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-    leftButton.titleLabel.font = [UIFont systemFontOfSize:14];
-    leftButton.titleLabel.adjustsFontSizeToFitWidth = YES;
-    [leftButton setImage:image forState:UIControlStateNormal];
-    [leftButton setBackgroundImage:leftBarBGImg forState:UIControlStateNormal];
-    [leftButton setAdjustsImageWhenHighlighted:YES];
-    [leftButton addTarget:self action:action forControlEvents:UIControlEventTouchUpInside];
+    UIButton *btn = nil;
+    UIBarButtonItem *barItem = [self creatBarItemByTitle:title
+                                                   image:image
+                                                 bgImage:bgImage
+                                                    size:size
+                                                  action:action
+                                                  button:&btn];
+    if (leftOffset != 0) {
+        UIBarButtonItem *flexSpacer = [[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemFixedSpace target:self action:nil];
+        flexSpacer.width = leftOffset;
+        [self.navigationItem setLeftBarButtonItems:@[flexSpacer,barItem]];
+    } else {
+        [self.navigationItem setLeftBarButtonItems:@[barItem]];
+    }
     
-    UIView *leftView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, buttonFrame.size.width, NAV_BAR_HEIGHT)];
-    leftView.backgroundColor = [UIColor clearColor];
-    [leftView addSubview:leftButton];
-    
-    UIBarButtonItem *leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:leftView];
-    [leftBarButtonItem setBackgroundVerticalPositionAdjustment:0.0f forBarMetrics:UIBarMetricsDefault];
-    
-    UIBarButtonItem *flexSpacer = [[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemFixedSpace target:self action:nil];
-    flexSpacer.width = -NAV_BAR_ITEM_SPACE;
-    [self.navigationItem setLeftBarButtonItems:@[flexSpacer,leftBarButtonItem]];
-    
-    return leftButton;
+    return btn;
 }
 
-// 设置右边按钮
 - (UIButton *)setRightBarByTitle:(NSString *)title
                            image:(UIImage *)image
+                         bgImage:(UIImage *)bgImage
+                     rightOffset:(CGFloat)rightOffset
+                            size:(CGSize)size
                           action:(SEL)action {
-    UIImage *barBGImg = [UIImage imageNamed:@"bg_nav_bar_right"];
-    CGRect buttonFrame = CGRectMake(0,
-                                    STATUS_BAR_HEIGHT/2,
-                                    barBGImg.size.width+8,
-                                    barBGImg.size.height);
-    
-    UIButton *rightButton = [[UIButton alloc] initWithFrame:buttonFrame];
-    [rightButton setTitle:title forState:UIControlStateNormal];
-    rightButton.titleLabel.adjustsFontSizeToFitWidth = YES;
-    [rightButton setImage:image forState:UIControlStateNormal];
-    [rightButton setBackgroundImage:barBGImg forState:UIControlStateNormal];
-    [rightButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-    rightButton.titleLabel.font = [UIFont systemFontOfSize:14];
-    [rightButton setAdjustsImageWhenHighlighted:YES];
-    [rightButton addTarget:self action:action forControlEvents:UIControlEventTouchUpInside];
+    UIButton *btn = nil;
+    UIBarButtonItem *barItem = [self creatBarItemByTitle:title
+                                                   image:image
+                                                 bgImage:bgImage
+                                                    size:size
+                                                  action:action
+                                                  button:&btn];
+    if (rightOffset != 0) {
+        UIBarButtonItem *flexSpacer = [[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemFixedSpace target:self action:nil];
+        flexSpacer.width = rightOffset;
+        [self.navigationItem setLeftBarButtonItems:@[flexSpacer,barItem]];
+    } else {
+        [self.navigationItem setLeftBarButtonItems:@[barItem]];
+    }
 
-    UIView *rightView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, buttonFrame.size.width, NAV_BAR_HEIGHT)];
-    rightView.backgroundColor = [UIColor clearColor];
-    [rightView addSubview:rightButton];
-
-    UIBarButtonItem *rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:rightView];
-    [rightBarButtonItem setBackgroundVerticalPositionAdjustment:0.0f forBarMetrics:UIBarMetricsDefault];
-
-    UIBarButtonItem *flexSpacer = [[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemFixedSpace target:self action:nil];
-    flexSpacer.width = -NAV_BAR_ITEM_SPACE;
-    [self.navigationItem setRightBarButtonItems:@[flexSpacer,rightBarButtonItem]];
-    
-    return rightButton;
+    return btn;
 }
 
-#pragma mark - Action Method
-- (void)bsBackBarClicked{
+- (void)defaultBackBarAction {
     [self.view endEditing:YES];
     if (self.navigationController.viewControllers.count == 1) {
         [self.navigationController dismissViewControllerAnimated:YES completion:nil];
     } else {
         [self.navigationController popViewControllerAnimated:YES];
     }
+}
+
+#pragma mark - Customer Setting (in this project)
+- (void)setBackBarVisible:(BOOL)isVisible{
+    if (!isVisible) {
+        [self.navigationItem setLeftBarButtonItem:nil];
+        return;
+    }
+
+    [self setLeftBarByTitle:@"返回"
+                      image:nil
+                    bgImage:nil
+                 leftOffset:0
+                       size:CGSizeMake(80, 44)
+                     action:@selector(defaultBackBarAction)];
 }
 
 @end

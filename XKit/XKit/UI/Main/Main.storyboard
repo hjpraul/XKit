@@ -76,6 +76,9 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="Root View Controller" id="41S-79-VZ1"/>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="boolean" keyPath="useCommonBackBar" value="NO"/>
+                    </userDefinedRuntimeAttributes>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="AGe-JZ-6ZD" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

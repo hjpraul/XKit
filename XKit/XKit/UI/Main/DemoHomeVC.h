@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface DemoHomeVC : UITableViewController
+@interface DemoHomeVC : XBSTableVC
 
 @end
