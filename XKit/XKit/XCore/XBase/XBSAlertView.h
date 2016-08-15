@@ -38,7 +38,7 @@ typedef NS_ENUM(NSInteger, XAlertViewPosition){
 };
 
 @interface XBSAlertView : UIView
-@property(nonatomic, assign) BOOL enableClickBGToDismiss;
+@property(nonatomic, assign) IBInspectable BOOL dismissWhenClickBlank;
 @property(nonatomic, assign) XAlertViewPresentationStyle presentationStyle;
 @property(nonatomic, assign) XAlertViewDismissalStyle dismissalStyle;
 @property(nonatomic, assign) XAlertViewPosition position;

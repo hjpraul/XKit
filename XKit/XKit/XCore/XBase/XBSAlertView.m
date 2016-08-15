@@ -52,36 +52,6 @@ typedef void (^AnimationCompletionBlock)(BOOL);
 }
 
 #pragma mark - Private Method
-- (UIImage *)backgroundGradientImageWithSize:(CGSize)size{
-	CGPoint center = CGPointMake(size.width * 0.5, size.height * 0.5);
-	CGFloat innerRadius = 0;
-    CGFloat outerRadius = sqrtf(size.width * size.width + size.height * size.height) * 0.5;
-    
-	BOOL opaque = NO;
-    UIGraphicsBeginImageContextWithOptions(size, opaque, [[UIScreen mainScreen] scale]);
-	CGContextRef context = UIGraphicsGetCurrentContext();
-    
-    const size_t locationCount = 2;
-    CGFloat locations[locationCount] = { 0.0, 0.8 };
-    CGFloat components[locationCount * 4] = {
-		0.0, 0.0, 0.0, 0.4, // More transparent black
-		0.0, 0.0, 0.0, 0.5  // More opaque black
-	};
-	
-    CGColorSpaceRef colorspace = CGColorSpaceCreateDeviceRGB();
-    CGGradientRef gradient = CGGradientCreateWithColorComponents(colorspace, components, locations, locationCount);
-	
-    CGContextDrawRadialGradient(context, gradient, center, innerRadius, center, outerRadius, 0);
-	
-    UIImage *image = UIGraphicsGetImageFromCurrentImageContext();
-    UIGraphicsEndImageContext();
-    
-    CGColorSpaceRelease(colorspace);
-    CGGradientRelease(gradient);
-	
-    return image;
-}
-
 - (void)setStartPosition {
     switch (_presentationStyle) {
         case kXAlertViewPresentationStylePushFromTop:
@@ -236,8 +206,8 @@ typedef void (^AnimationCompletionBlock)(BOOL);
 }
 
 // 点旁边dismiss
-- (void)imgBgTapped:(UITapGestureRecognizer *)sender{
-    if (_enableClickBGToDismiss) {
+- (void)bgTapped:(UITapGestureRecognizer *)sender{
+    if (_dismissWhenClickBlank) {
         [self dismiss];
     }
 }
@@ -250,11 +220,12 @@ typedef void (^AnimationCompletionBlock)(BOOL);
 - (void)showWithStyle:(XAlertViewPresentationStyle)presentationStyle{
     [self setPresentationStyle:presentationStyle];
     
-    //记住KeyWindow
+    // 记住KeyWindow
     [self setPreviousWindow:[[UIApplication sharedApplication] keyWindow]];
     
-    //设置AlertWindow
     CGRect bounds = [[UIScreen mainScreen] bounds];
+    
+    // 设置AlertWindow
     UIWindow *window = [[UIWindow alloc] initWithFrame:bounds];
     UIViewController *vc = [[UIViewController alloc] init];
     vc.view.backgroundColor = [UIColor clearColor];
@@ -264,8 +235,8 @@ typedef void (^AnimationCompletionBlock)(BOOL);
     [self setAlertWindow:window];
     
     
-    //设置遮罩背景
-    UIImage *bgImage = [self backgroundGradientImageWithSize:bounds.size];
+    // 设置遮罩背景
+    UIImage *bgImage = [UIImage x_imageWithColor:RGBA(0, 0, 0, 0.4) size:bounds.size];
     UIImageView *imageView = [[UIImageView alloc] initWithFrame:bounds];
     [imageView setUserInteractionEnabled:YES];
     [imageView setImage:bgImage];
@@ -273,7 +244,7 @@ typedef void (^AnimationCompletionBlock)(BOOL);
 	[vc.view addSubview:imageView];
     
     // 增加点击背景关闭的手势
-    UITapGestureRecognizer *gesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(imgBgTapped:)];
+    UITapGestureRecognizer *gesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(bgTapped:)];
     [imageView addGestureRecognizer:gesture];
     
     //设置提示弹框
@@ -282,7 +253,6 @@ typedef void (^AnimationCompletionBlock)(BOOL);
     
 	//出入场动画
     [self performPresentationAnimation];
-//	[self performSelector:@selector(performPresentationAnimation) withObject:nil afterDelay:0];
 }
 
 - (void)dismiss{
