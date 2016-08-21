@@ -10,10 +10,7 @@
 #import "NSString+XCoder.h"
 #import "NSObject+XJSON.h"
 
-#define kApiVersion @"BOC.1.1.5"
-
-static NSString *const serverUrl = @"http://115.28.225.111:9091/app/";    //服务器地址
-static NSString *const MD5Key    = @"anxinfu_dev_27aa0e66b9be11e58b6c3c15c2ba2cb4";
+static NSString *const serverUrl = @"http://app.hotapi.cn/android/";    //服务器地址
 
 @implementation NSObject (XHTTP)
 
@@ -24,13 +21,22 @@ static NSString *const MD5Key    = @"anxinfu_dev_27aa0e66b9be11e58b6c3c15c2ba2cb
     dispatch_once(&onceToken, ^{
         sessionManager = [AFHTTPSessionManager manager];
         sessionManager.requestSerializer = [AFHTTPRequestSerializer serializer];
-        [sessionManager.requestSerializer setValue:@"application/x-www-form-urlencoded" forHTTPHeaderField:@"Content-Type"];
+        [sessionManager.requestSerializer setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
         sessionManager.responseSerializer = [AFHTTPResponseSerializer serializer];
-        sessionManager.responseSerializer.acceptableContentTypes = [NSSet setWithObjects:@"application/octet-stream",@"text/html",@"application/x-www-form-urlencoded",@"text/plain",nil];
+        sessionManager.responseSerializer.acceptableContentTypes = [NSSet setWithObjects:@"application/json",@"application/octet-stream",@"text/html",@"application/x-www-form-urlencoded",@"text/plain",nil];
         sessionManager.securityPolicy = [AFSecurityPolicy policyWithPinningMode:AFSSLPinningModeNone];
     });
     
     return sessionManager;
+}
+
+- (NSMutableDictionary *)finalParamsWithParams:(NSDictionary *)params {
+    NSMutableDictionary *dic = [[NSMutableDictionary alloc] initWithDictionary:params];
+    // TODO:
+    [dic x_setObject:@"" forOBField:@"Timestamp"];
+    [dic x_setObject:@"" forOBField:@"Sign"];
+    [dic x_setObject:@"" forOBField:@"IMEI"];
+    return dic;
 }
 
 #pragma mark - runtime
@@ -62,11 +68,24 @@ static NSString *const MD5Key    = @"anxinfu_dev_27aa0e66b9be11e58b6c3c15c2ba2cb
                          params:(NSDictionary *)params
                         success:(void (^)(NSURLSessionDataTask *task, id responseObject))success
                         failure:(void (^)(NSURLSessionDataTask *task, NSError *error))failure {
-    NSMutableString *realUrl = [NSMutableString stringWithFormat:@"%@%@/%@",serverUrl,kApiVersion,action];
-    NSURLSessionDataTask *task = [[[self class] sharedManager] GET:realUrl parameters:params progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
-        BLOCK_SAFE(success)(task,responseObject);
+    NSMutableDictionary *finalParams = [self finalParamsWithParams:params];
+    NSMutableString *url = [NSMutableString stringWithFormat:@"%@/%@",serverUrl,action];
+    NSURLSessionDataTask *task = [[[self class] sharedManager] GET:url parameters:finalParams progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        NSDictionary *respDic = [NSObject x_objectFromJSONData:responseObject];
+        NSInteger code = [respDic[@"code"] integerValue];
+        if (code == 0) {
+            NSDictionary *dataDic = respDic[@"data"];
+            BLOCK_SAFE(success)(task,dataDic);
+        } else {
+            NSString *msg = respDic[@"msg"];
+            NSError *error = [NSError x_bussinessError:code message:msg];
+            BLOCK_SAFE(failure)(task,error);
+        }
+
+        [self removeTask:task];
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         BLOCK_SAFE(failure)(task,error);
+        [self removeTask:task];
     }];
     task.taskDescription = [NSString stringWithFormat:@"%zd",tag];
     [self addTask:task];
@@ -80,15 +99,23 @@ static NSString *const MD5Key    = @"anxinfu_dev_27aa0e66b9be11e58b6c3c15c2ba2cb
                         bodyPart:(void (^)(id <AFMultipartFormData> formData))bodyPart
                          success:(void (^)(NSURLSessionDataTask *operation, id responseObject))success
                          failure:(void (^)(NSURLSessionDataTask *operation, NSError *error))failure {
-    NSMutableString *realUrl = [NSMutableString stringWithFormat:@"%@%@/%@",serverUrl,kApiVersion,action];
-    NSURLSessionDataTask *task = [[[self class] sharedManager] POST:realUrl parameters:params progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+    NSMutableDictionary *finalParams = [self finalParamsWithParams:params];
+    NSMutableString *url = [NSMutableString stringWithFormat:@"%@/%@",serverUrl,action];
+    NSURLSessionDataTask *task = [[[self class] sharedManager] POST:url parameters:finalParams progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         [self removeTask:task];
-        BLOCK_SAFE(success)(task,responseObject);
+
+        NSDictionary *respDic = [NSObject x_objectFromJSONData:responseObject];
+        NSInteger code = [respDic[@"code"] integerValue];
+        if (code == 0) {
+            NSDictionary *dataDic = respDic[@"data"];
+            BLOCK_SAFE(success)(task,dataDic);
+        } else {
+            NSString *msg = respDic[@"msg"];
+            NSError *error = [NSError x_bussinessError:code message:msg];
+            BLOCK_SAFE(failure)(task,error);
+        }
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         BLOCK_SAFE(failure)(task,error);
-        for (NSURLSessionDataTask *enumTsk in self.tasks) {
-            NSLog(@"test:%@",enumTsk.taskDescription);
-        }
         [self removeTask:task];
     }];
     task.taskDescription = [NSString stringWithFormat:@"%zd",tag];

@@ -46,6 +46,8 @@
 // Base
 #import "XBSVC.h"
 #import "XBSTableVC.h"
+#import "XBSAlertView.h"
+#import "XBSTabBarItem.h"
 
 
 #undef	RGB
