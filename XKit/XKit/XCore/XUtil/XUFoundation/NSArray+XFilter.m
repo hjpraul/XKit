@@ -33,4 +33,14 @@
 
     return resultArray;
 }
+
+- (NSArray *)x_fetchValuesOfKey:(NSString *)key {
+    NSMutableArray *resultArray = [[NSMutableArray alloc] init];
+    for (id obj in self) {
+        if ([obj valueForKey:key]) {
+            [resultArray addObject:[obj valueForKey:key]];
+        }
+    }
+    return resultArray;
+}
 @end
