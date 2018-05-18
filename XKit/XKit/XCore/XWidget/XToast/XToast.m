@@ -101,7 +101,15 @@
 
 - (void)show{
     UIWindow *window = [UIApplication sharedApplication].keyWindow;
-    self.contentView.center = window.center;
+    if ([IQKeyboardManager sharedManager].isKeyboardShowing) {
+        if ([IQKeyboardManager sharedManager].enableAutoToolbar) {
+            self.contentView.center = CGPointMake(window.center.x, window.center.y-44);
+        } else {
+            self.contentView.center = window.center;
+        }
+    } else {
+        self.contentView.center = window.center;
+    }
     [window  addSubview:self.contentView];
     [self showAnimation];
     [self performSelector:@selector(hideAnimation) withObject:nil afterDelay:self.duration];

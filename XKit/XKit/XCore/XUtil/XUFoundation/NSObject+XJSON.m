@@ -27,6 +27,10 @@
 }
 
 + (id)x_objectFromJSONData:(NSData *)jsonData{
+    if (!jsonData) {
+        NSLog(@"解析JSON出错--->error:%@",@"jsonData为空");
+        return nil;
+    }
     NSError *error = nil;
     NSJSONReadingOptions options = NSJSONReadingMutableContainers|NSJSONReadingMutableLeaves|NSJSONReadingAllowFragments;
     id jsonObject = [NSJSONSerialization JSONObjectWithData:jsonData options:options error:&error];

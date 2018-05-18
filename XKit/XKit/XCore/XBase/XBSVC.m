@@ -44,6 +44,8 @@
 - (void)setUseCommonBackBar:(BOOL)useCommonBackBar {
     if (useCommonBackBar) {
         [self setBackBarVisible:YES];
+    } else {
+        [self setBackBarVisible:NO];
     }
 }
 

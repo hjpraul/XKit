@@ -9,7 +9,7 @@
 #import "XBSFatherVC.h"
 
 @interface XBSFatherVC ()
-@property (strong, nonatomic) UIView *containerView;  // TODO:这里理论上可以用weak吧？
+@property (strong, nonatomic) UIView *containerView;
 @end
 
 @implementation XBSFatherVC
@@ -35,6 +35,13 @@
 */
 
 #pragma mark - Public Method
+- (void)cleanChilds {
+    for (UIViewController *childVc in _childVcs) {
+        [childVc removeFromParentViewController];
+        [childVc.view removeFromSuperview];
+    }
+    _childVcs = nil;
+}
 - (void)setChildVcs:(NSArray *)childVcs
       containerView:(UIView *)containerView {
     if (childVcs.count <= 0) {
@@ -47,6 +54,7 @@
         UIViewController *childVc = nil;
         if (i == _childVcs.count) {
             childVc = _childVcs[0];
+            self.title = childVc.navigationItem.title;
         } else {
             childVc = _childVcs[i];
         }
@@ -61,6 +69,38 @@
 
 - (void)showChildVc:(UIViewController *)childVc {
     if (![_childVcs containsObject:childVc]) {
+        return;
+    }
+
+    self.title = childVc.navigationItem.title;
+    UIViewController *toVc = childVc;
+    UIViewController *fromVc = nil;
+    for (UIViewController *vc in _childVcs) {
+        if (vc.view == self.containerView.subviews.lastObject) {
+            fromVc = vc;
+        }
+    }
+    if (toVc && fromVc && (fromVc!=toVc)) {
+        [self transitionFromViewController:fromVc toViewController:toVc duration:0.3 options:UIViewAnimationOptionTransitionCrossDissolve|UIViewAnimationOptionCurveEaseInOut animations:^{
+            ;
+        } completion:^(BOOL finished) {
+            ;
+        }];
+    }
+}
+
+- (void)showChildWithIndex:(NSInteger)index {
+    if (index >= _childVcs.count) {
+        return;
+    }
+
+    UIViewController *toVc = [_childVcs objectAtIndex:index];
+    [self showChildVc:toVc];
+}
+
+#pragma mark - 用户自定义动画
+- (void)pullUpShowChildVc:(UIViewController *)childVc {
+    if (![_childVcs containsObject:childVc]) {
         // TODO:log
         return;
     }
@@ -73,21 +113,37 @@
         }
     }
     if (toVc && fromVc && (fromVc!=toVc)) {
-        [self transitionFromViewController:fromVc toViewController:toVc duration:0.3 options:UIViewAnimationOptionTransitionCrossDissolve|UIViewAnimationOptionCurveEaseInOut animations:^{
-            ;
+        toVc.view.x_top = self.containerView.x_height;
+        toVc.view.x_bottom = self.containerView.x_height*2;
+        [self transitionFromViewController:fromVc toViewController:toVc duration:0.3 options:UIViewAnimationOptionShowHideTransitionViews animations:^{
+            toVc.view.frame = self.containerView.bounds;
         } completion:^(BOOL finished) {
             ;// TODO:
         }];
     }
 }
 
-- (void)showChildWithIndex:(NSInteger)index {
-    if (index >= _childVcs.count) {
-        // TODO: log
+- (void)pushDownShowChildVc:(UIViewController *)childVc {
+    if (![_childVcs containsObject:childVc]) {
+        // TODO:log
         return;
     }
 
-    UIViewController *toVc = [_childVcs objectAtIndex:index];
-    [self showChildVc:toVc];
+    UIViewController *toVc = childVc;
+    UIViewController *fromVc = nil;
+    for (UIViewController *vc in _childVcs) {
+        if (vc.view == self.containerView.subviews.lastObject) {
+            fromVc = vc;
+        }
+    }
+    if (toVc && fromVc && (fromVc!=toVc)) {
+        toVc.view.x_top = -self.containerView.x_height;
+        toVc.view.x_bottom = 0;
+        [self transitionFromViewController:fromVc toViewController:toVc duration:0.3 options:UIViewAnimationOptionShowHideTransitionViews animations:^{
+            toVc.view.frame = self.containerView.bounds;
+        } completion:^(BOOL finished) {
+            ;// TODO:
+        }];
+    }
 }
 @end

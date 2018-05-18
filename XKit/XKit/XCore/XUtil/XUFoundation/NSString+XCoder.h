@@ -12,4 +12,6 @@
 - (NSString *)x_urlEncode;
 - (NSString *)x_urlDecode;
 - (NSString *)x_md5Encode;
+- (NSString *)x_base64Encode;
+- (NSString *)x_base64Decode;
 @end

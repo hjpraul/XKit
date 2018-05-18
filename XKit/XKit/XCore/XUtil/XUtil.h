@@ -24,9 +24,12 @@
 
 // 设备相关信息
 + (NSString *)systemVersion;
++ (NSInteger)systemMainVersion;
 + (NSString *)systemName;
 + (BOOL)isIOS8Above;
 + (BOOL)isIOS9Above;
++ (BOOL)isIOS11Above;
++ (CGFloat)videoMaxFactor;  // 视频摄像头支持最大缩放
 
 // Bundle相关（路径）
 + (NSString *)pngPathOfName:(NSString *)name;
@@ -37,5 +40,9 @@
 // 坐标相关
 + (CGFloat)screenWidth;
 + (CGFloat)screenHeight;
-
++ (CGFloat)statusBarHeight;
++ (CGFloat)navgationBarHeight;
++ (CGFloat)tabBarHeight;
+// 当前最前面的vc
++ (UIViewController *)appFrontVc;
 @end

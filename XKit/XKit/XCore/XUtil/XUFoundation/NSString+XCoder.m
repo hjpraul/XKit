@@ -31,7 +31,7 @@
     }
     unsigned char result[CC_MD5_DIGEST_LENGTH];
     NSData *data = [self dataUsingEncoding:NSUTF8StringEncoding];
-    CC_MD5(data.bytes, (CC_LONG)self.length, result);
+    CC_MD5(data.bytes, (CC_LONG)strlen(self.UTF8String), result);
     return [NSString stringWithFormat:
             @"%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x",
             result[0], result[1], result[2], result[3],
@@ -39,5 +39,20 @@
             result[8], result[9], result[10], result[11],
             result[12], result[13], result[14], result[15]
             ];
+}
+
+- (NSString *)x_base64Encode {
+    NSData *data = [self dataUsingEncoding:NSUTF8StringEncoding];
+    NSString *base64String = [data base64EncodedStringWithOptions:0];
+    return base64String;
+
+}
+
+- (NSString *)x_base64Decode {
+    NSData *data = [[NSData alloc] initWithBase64EncodedString:self options:0];
+    NSString *text = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+    
+    return text;
+    
 }
 @end

@@ -18,11 +18,22 @@
     [super viewDidLoad];
 
     [self customViewDidLoad];
-    // Uncomment the following line to preserve selection between presentations.
-    // self.clearsSelectionOnViewWillAppear = NO;
-    
-    // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-    // self.navigationItem.rightBarButtonItem = self.editButtonItem;
+}
+
+-(void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+    [self setNeedsStatusBarAppearanceUpdate];
+    [aliPageHitHelper pageAppear:self];
+    // 系统返回手势
+    if ([self.navigationController respondsToSelector:@selector(interactivePopGestureRecognizer)]) {
+        if ([self.navigationController.viewControllers count] > 1) {
+            self.navigationController.interactivePopGestureRecognizer.enabled = YES;
+            self.navigationController.interactivePopGestureRecognizer.delegate = (id)self;
+        }else{
+            self.navigationController.interactivePopGestureRecognizer.enabled = NO;
+            self.navigationController.interactivePopGestureRecognizer.delegate = nil;
+        }
+    }
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -39,6 +50,8 @@
 - (void)setUseCommonBackBar:(BOOL)useCommonBackBar {
     if (useCommonBackBar) {
         [self setBackBarVisible:YES];
+    } else {
+        [self setBackBarVisible:NO];
     }
 }
 

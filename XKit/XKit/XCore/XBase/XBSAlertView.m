@@ -11,7 +11,7 @@
 #define ANIMATION_DURATION  (0.3f)
 #define DELAY_DURATION      (0.0f)
 
-typedef void (^AnimationBlock)();
+typedef void (^AnimationBlock)(void);
 typedef void (^AnimationCompletionBlock)(BOOL);
 
 @interface XBSAlertView()
@@ -161,6 +161,7 @@ typedef void (^AnimationCompletionBlock)(BOOL);
         [self removeFromSuperview];
         
         [self.previousWindow makeKeyWindow];
+        self.alertWindow.alpha = 0;
         [self setPreviousWindow:nil];
         [self setDimImageView:nil];
         [self setAlertWindow:nil];

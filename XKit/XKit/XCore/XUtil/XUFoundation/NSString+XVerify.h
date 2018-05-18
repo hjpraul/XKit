@@ -26,4 +26,8 @@
 
 // 是否是金额表示方式
 - (BOOL)x_isAmount;
+
+// 判断是否是合法身份证号
+- (BOOL)x_isLegalIDCard;
+
 @end

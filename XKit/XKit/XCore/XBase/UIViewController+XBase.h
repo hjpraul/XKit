@@ -11,6 +11,25 @@
 @interface UIViewController (XBase)
 
 #pragma mark - Public Method
+
+/**
+ 创建导航栏BarItem
+
+ @param title 标题
+ @param image 图片
+ @param bgImage 背景图片
+ @param size 按钮展示大小
+ @param action 响应
+ @param button 按钮返回
+ @return BarItem
+ */
+- (UIBarButtonItem *)creatBarItemByTitle:(NSString *)title
+                                   image:(UIImage *)image
+                                 bgImage:(UIImage *)bgImage
+                                    size:(CGSize)size
+                                  action:(SEL)action
+                                  button:(UIButton **)button;
+
 /**
  *  @brief 设置导航栏左键
  *
@@ -53,6 +72,11 @@
  *  @brief 缺省导航栏返回按钮响应
  */
 - (void)defaultBackBarAction;
+
+/**
+ *  @brief 设置导航栏透明
+ */
+- (void)setNavigationBarTransparent:(BOOL)isTransparent;
 
 #pragma mark - Customer Setting (in this project)
 /**

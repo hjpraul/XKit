@@ -7,6 +7,7 @@
 //
 
 #import "UIView+XBlank.h"
+#import "UIImage+GIF.h"
 
 #define IMAGE_TAG   (8709141)
 #define MESSAGE_TAG (8709142)
@@ -45,16 +46,16 @@
             messageLabel = [[UILabel alloc] init];
             messageLabel.tag = MESSAGE_TAG;
             messageLabel.backgroundColor = [UIColor clearColor];
-            messageLabel.textColor = [UIColor lightGrayColor];
+            messageLabel.textColor = [UIColor darkGrayColor];
             messageLabel.textAlignment = NSTextAlignmentCenter;
-            messageLabel.font = [UIFont systemFontOfSize:15];
+            messageLabel.font = [UIFont systemFontOfSize:14];
             messageLabel.numberOfLines = 0;
             [self insertSubview:messageLabel atIndex:0];
         }
         messageLabel.text= message;
         
         if (imageView) {
-            [messageLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+            [messageLabel mas_remakeConstraints:^(MASConstraintMaker *make) {
                 make.centerX.equalTo(weakSelf);
                 make.top.equalTo(imageView.mas_bottom).offset(8);
                 make.left.greaterThanOrEqualTo(weakSelf).offset(16);
@@ -92,6 +93,9 @@
         [button removeFromSuperview];
         button = nil;
     }
+    [self bringSubviewToFront:imageView];
+    [self bringSubviewToFront:messageLabel];
+    [self bringSubviewToFront:button];
     
     objc_setAssociatedObject(self, "__blankAction__", action, OBJC_ASSOCIATION_COPY);
 }
@@ -102,7 +106,7 @@
     UIImage *image = nil;
     switch (type) {
         case kBlankTypeLoading:{
-            image = [UIImage animatedImageNamed:@"blank_loading_gif" duration:0.8];
+            image = [UIImage sd_animatedGIFNamed:@"loading"];//[UIImage animatedImageNamed:@"blank_loading_gif" duration:0.8];
         }break;
         case kBlankTypeFailed:{
             image = [UIImage imageNamed:@"空白提示-加载失败"];

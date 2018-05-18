@@ -12,7 +12,7 @@
 @interface XRefreshCollectionView : UICollectionView
 @property (weak, nonatomic) IBOutlet id<XRefreshCollectionViewDelegate> refreshDelegate;
 @property (strong, nonatomic) NSMutableArray *dataArray;
-@property (assign, nonatomic) NSUInteger pageSize;
+@property (assign, nonatomic) NSUInteger pageSize;      // 0表示不分页
 @property (assign, nonatomic) NSUInteger pageIndex;
 
 @property (assign, nonatomic) BOOL loadWithBlank;

@@ -39,6 +39,7 @@
 }
 
 - (void)awakeFromNib {
+    [super awakeFromNib];
     self.pageSize = 10;
     self.pageIndex = 0;
     self.loadWithBlank = YES;
@@ -72,7 +73,7 @@
             [weakSelf reloadData];
             
             [weakSelf addRefreshFooter];
-            if (list.count < weakSelf.pageSize) {
+            if ((list.count < weakSelf.pageSize) || (weakSelf.pageSize == 0)) {
                 [weakSelf.mj_footer endRefreshingWithNoMoreData];
             } else {
                 [weakSelf.mj_footer endRefreshing];
@@ -90,7 +91,7 @@
         } failure:^(NSError *error) {
             [weakSelf.mj_header endRefreshing];
             
-            NSString *message = error.localizedDescription?:weakSelf.emptyMessage;
+            NSString *message = error.x_errorMessage?:weakSelf.emptyMessage;
             if (weakSelf.dataArray.count==0) {
                 weakSelf.mj_footer.hidden = YES;
                 [weakSelf showBlankWithType:kBlankTypeFailed message:message action:^{
@@ -138,7 +139,7 @@
         } failure:^(NSError *error) {
             [weakSelf.mj_footer endRefreshing];
             
-            NSString *message = error.localizedDescription?:weakSelf.emptyMessage;
+            NSString *message = error.x_errorMessage?:weakSelf.emptyMessage;
             if (weakSelf.dataArray.count==0) {
                 weakSelf.mj_footer.hidden = YES;
                 [weakSelf showBlankWithType:kBlankTypeNoInfo message:message action:^{
@@ -160,6 +161,7 @@
 
 - (void)refreshData {
     if (self.loadWithBlank) {
+        [self showBlankWithType:kBlankTypeLoading message:nil action:nil];
         BLOCK_SAFE(self.mj_header.refreshingBlock)();
     } else {
         [self.mj_header beginRefreshing];

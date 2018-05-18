@@ -9,6 +9,7 @@
 #import "UIViewController+XBase.h"
 
 @implementation UIViewController (XBase)
+#pragma mark - Public Method
 - (UIBarButtonItem *)creatBarItemByTitle:(NSString *)title
                                    image:(UIImage *)image
                                  bgImage:(UIImage *)bgImage
@@ -19,14 +20,16 @@
     UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
     btn.frame = frame;
     [btn setTitle:title forState:UIControlStateNormal];
-    [btn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-    btn.titleLabel.font = [UIFont systemFontOfSize:15];
+    [btn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    btn.titleLabel.font = [UIFont systemFontOfSize:14];
     btn.titleLabel.adjustsFontSizeToFitWidth = YES;
     [btn setImage:image forState:UIControlStateNormal];
     [btn setBackgroundImage:bgImage forState:UIControlStateNormal];
     [btn setAdjustsImageWhenHighlighted:YES];
     [btn addTarget:self action:action forControlEvents:UIControlEventTouchUpInside];
-    *button = btn;
+    if (button) {
+        *button = btn;
+    }
 
     UIView *barView = [[UIView alloc] initWithFrame:frame];
     barView.backgroundColor = [UIColor clearColor];
@@ -38,7 +41,6 @@
     return barItem;
 }
 
-#pragma mark - Public Method
 - (UIButton *)setLeftBarByTitle:(NSString *)title
                           image:(UIImage *)image
                         bgImage:(UIImage *)bgImage
@@ -58,6 +60,9 @@
         [self.navigationItem setLeftBarButtonItems:@[flexSpacer,barItem]];
     } else {
         [self.navigationItem setLeftBarButtonItems:@[barItem]];
+    }
+    if ([XUtil systemMainVersion] >= 11) {
+        btn.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
     }
     
     return btn;
@@ -79,9 +84,12 @@
     if (rightOffset != 0) {
         UIBarButtonItem *flexSpacer = [[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemFixedSpace target:self action:nil];
         flexSpacer.width = rightOffset;
-        [self.navigationItem setLeftBarButtonItems:@[flexSpacer,barItem]];
+        [self.navigationItem setRightBarButtonItems:@[flexSpacer,barItem]];
     } else {
-        [self.navigationItem setLeftBarButtonItems:@[barItem]];
+        [self.navigationItem setRightBarButtonItems:@[barItem]];
+    }
+    if ([XUtil systemMainVersion] >= 11) {
+        btn.contentHorizontalAlignment = UIControlContentHorizontalAlignmentRight;
     }
 
     return btn;
@@ -93,6 +101,19 @@
         [self.navigationController dismissViewControllerAnimated:YES completion:nil];
     } else {
         [self.navigationController popViewControllerAnimated:YES];
+    }
+}
+
+- (void)setNavigationBarTransparent:(BOOL)isTransparent {
+    if (isTransparent) {
+        self.edgesForExtendedLayout = UIRectEdgeAll;
+        self.navigationController.navigationBar.translucent = YES;
+        [self.navigationController.navigationBar setBackgroundImage:[[UIImage x_imageWithColor:[UIColor clearColor] size:CGSizeMake(20, 20)] stretchableImageWithLeftCapWidth:5 topCapHeight:5] forBarMetrics:UIBarMetricsDefault];
+    } else {
+        self.edgesForExtendedLayout = UIRectEdgeNone;
+        self.navigationController.navigationBar.translucent = NO;
+        UIImage *tempNavBg = [UIImage x_imageWithColor:RGB(33, 138, 238) size:self.view.bounds.size];
+        [self.navigationController.navigationBar setBackgroundImage:tempNavBg forBarMetrics:UIBarMetricsDefault];
     }
 }
 
@@ -118,15 +139,21 @@
 
 - (void)setBackBarVisible:(BOOL)isVisible{
     if (!isVisible) {
-        [self.navigationItem setLeftBarButtonItem:nil];
+//        [self.navigationItem setLeftBarButtonItem:nil];
+        [self setLeftBarByTitle:nil
+                          image:nil
+                        bgImage:nil
+                     leftOffset:-16.0f
+                           size:CGSizeMake(44, 44)
+                         action:nil];
         return;
     }
 
-    [self setLeftBarByTitle:@"返回"
-                      image:nil
+    [self setLeftBarByTitle:nil
+                      image:[UIImage imageNamed:@"nav_back_white"]
                     bgImage:nil
-                 leftOffset:0
-                       size:CGSizeMake(80, 44)
+                 leftOffset:-16.0f
+                       size:CGSizeMake(44, 44)
                      action:@selector(defaultBackBarAction)];
 }
 

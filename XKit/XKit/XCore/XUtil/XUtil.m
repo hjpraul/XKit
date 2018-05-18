@@ -8,6 +8,7 @@
 
 #import "XUtil.h"
 #import <UIKit/UIKit.h>
+#import <AVFoundation/AVFoundation.h>
 
 @implementation XUtil
 // 目录快捷方式
@@ -57,6 +58,10 @@
     return [[UIDevice currentDevice] systemVersion];
 }
 
++ (NSInteger)systemMainVersion {
+    return [[[[[UIDevice currentDevice] systemVersion] componentsSeparatedByString:@"."] objectAtIndex:0] integerValue];
+}
+
 + (NSString *)systemName {
     return [[UIDevice currentDevice] systemName];
 }
@@ -67,6 +72,19 @@
 
 + (BOOL)isIOS9Above {
     return ([[[[[UIDevice currentDevice] systemVersion] componentsSeparatedByString:@"."] objectAtIndex:0] intValue] >= 9);
+}
+
++ (BOOL)isIOS11Above {
+    return ([[[[[UIDevice currentDevice] systemVersion] componentsSeparatedByString:@"."] objectAtIndex:0] intValue] >= 11);
+}
+
++ (CGFloat)videoMaxFactor {
+    static CGFloat factor = 1.0f;
+    if (factor == 1.0f) {
+        AVCaptureDevice *avDevice = [AVCaptureDevice defaultDeviceWithMediaType:AVMediaTypeVideo];
+        factor = avDevice.activeFormat.videoMaxZoomFactor;
+    }
+    return factor;
 }
 
 // Bundle相关（路径）
@@ -92,4 +110,45 @@
     return [UIScreen mainScreen].bounds.size.height;
 }
 
++ (CGFloat)statusBarHeight {
+    CGRect rectStatus = [[UIApplication sharedApplication] statusBarFrame];
+    return rectStatus.size.height;
+}
+
++ (CGFloat)navgationBarHeight {
+    UIViewController *vc = [[UIViewController alloc] init];
+    UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:vc];
+    CGRect rectNav = nav.navigationBar.frame;
+    return rectNav.size.height;
+}
+
++ (CGFloat)tabBarHeight {
+    UITabBarController *tabBarVC = [[UITabBarController alloc] init];
+    return tabBarVC.tabBar.frame.size.height;
+}
+
+// 当前最前面的vc
++ (UIViewController *)appFrontVc {
+    UIWindow * window = [[UIApplication sharedApplication] keyWindow];
+    if (window.windowLevel != UIWindowLevelNormal){
+        NSArray *windows = [[UIApplication sharedApplication] windows];
+        for(UIWindow * tmpWin in windows){
+            if (tmpWin.windowLevel == UIWindowLevelNormal){
+                window = tmpWin;
+                break;
+            }
+        }
+    }
+    UIViewController *result = window.rootViewController;
+    while (result.presentedViewController) {
+        result = result.presentedViewController;
+    }
+    if ([result isKindOfClass:[UITabBarController class]]) {
+        result = [(UITabBarController *)result selectedViewController];
+    }
+    if ([result isKindOfClass:[UINavigationController class]]) {
+        result = [(UINavigationController *)result topViewController];
+    }
+    return result;
+}
 @end

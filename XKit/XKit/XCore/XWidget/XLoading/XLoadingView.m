@@ -36,6 +36,7 @@ typedef NS_ENUM(NSInteger, LoadingStatus) {
 @implementation XLoadingView
 
 - (void)awakeFromNib {
+    [super awakeFromNib];
     [_contentView x_setCornerRadius:5.0];
 }
 
@@ -78,7 +79,12 @@ typedef NS_ENUM(NSInteger, LoadingStatus) {
     if (!loadingView) {
         loadingView = [[NSBundle mainBundle] loadNibNamed:@"XLoadingView" owner:nil options:nil].firstObject;
         [loadingView setTag:TAG_LOADINGVIEW];
-        [loadingView setFrame:CGRectMake(0, 0, view.bounds.size.width, view.bounds.size.height)];
+        if ([view isKindOfClass:[UIScrollView class]]) {
+            UIScrollView *tempView = (UIScrollView *)view;
+            [loadingView setFrame:CGRectMake(0, tempView.contentOffset.y, view.bounds.size.width, view.bounds.size.height)];
+        } else {
+            [loadingView setFrame:CGRectMake(0, 0, view.bounds.size.width, view.bounds.size.height)];
+        }
         [view addSubview:loadingView];
     }
     return loadingView;

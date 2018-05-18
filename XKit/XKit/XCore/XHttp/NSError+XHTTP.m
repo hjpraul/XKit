@@ -71,7 +71,9 @@
         }break;
         default:{
             message = [self.userInfo objectForKey:@"NSLocalizedDescription"];
-//            message = @"网络连接出错,请稍后重试";
+            if (message.length <= 0) {
+                message = self.userInfo[@"message"];
+            }
         }break;
     }
     return message;

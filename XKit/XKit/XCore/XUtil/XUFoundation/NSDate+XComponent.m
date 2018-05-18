@@ -14,7 +14,7 @@
 #define D_WEEK		604800
 #define D_YEAR		31556926
 
-#define CALENDAR [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar]
+#define CALENDAR [[NSCalendar alloc] initWithCalendarIdentifier:NSCalendarIdentifierGregorian]/*NSGregorianCalendar 7.0*/
 #define CALENDAR_UNIT (\
 NSCalendarUnitYear|\
 NSCalendarUnitMonth |\

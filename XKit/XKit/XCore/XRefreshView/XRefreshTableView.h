@@ -12,7 +12,7 @@
 @interface XRefreshTableView : UITableView
 @property (weak, nonatomic) IBOutlet id<XRefreshTableViewDelegate> refreshDelegate;
 @property (strong, nonatomic) NSMutableArray *dataArray;
-@property (assign, nonatomic) NSUInteger pageSize;
+@property (assign, nonatomic) NSUInteger pageSize;  // 0 表示不分页
 @property (assign, nonatomic) NSUInteger pageIndex;
 
 @property (assign, nonatomic) BOOL loadWithBlank;

@@ -16,6 +16,7 @@
 #import "NSMutableDictionary+XHTTP.h"
 
 // Category
+#import "UIViewController+XBase.h"
 #import "NSDate+XComponent.h"
 #import "NSDate+XFormat.h"
 #import "NSObject+XJSON.h"
@@ -26,17 +27,19 @@
 #import "NSArray+XFilter.h"
 #import "UIImage+XCreate.h"
 #import "UIImage+XEdit.h"
+#import "UIImage+XGif.h"
 #import "UIView+XBlank.h"
 #import "UIView+XEdit.h"
 #import "UIView+XPositioning.h"
 #import "UIView+XSize.h"
+#import "UIScrollView+XAdapt.h"
+#import "NSObject+DecimalNumber.h"
 
 // loading && toast
 #import "UIViewController+XLoading.h"
 #import "NSString+XToast.h"
 
 // common widget
-#import "XCommonLine.h"
 
 // Other
 #import "XDBManager.h"

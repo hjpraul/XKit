@@ -9,7 +9,6 @@
 #import "NSNull+XSafe.h"
 
 @implementation NSNull (XSafe)
-// TODO:log
 
 - (NSInteger)integerValue {
     return 0;

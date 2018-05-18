@@ -10,6 +10,13 @@
 
 @interface XBSFatherVC : XBSVC
 @property (strong, nonatomic, readonly) NSArray *childVcs;
+
+
+/**
+ 清空childViewController
+ */
+- (void)cleanChilds;
+
 /**
  *  @brief 初始化设置
  *
@@ -32,4 +39,8 @@
  *  @param index 对应childViewController的索引
  */
 - (void)showChildWithIndex:(NSInteger)index;
+
+#pragma mark - 用户自定义动画
+- (void)pullUpShowChildVc:(UIViewController *)childVc;
+- (void)pushDownShowChildVc:(UIViewController *)childVc;
 @end
