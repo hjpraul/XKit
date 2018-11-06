@@ -37,9 +37,9 @@
 
 - (void)layoutSubviews
 {
-    [super layoutSubviews];
-    
     [self placeSubviews];
+    
+    [super layoutSubviews];
 }
 
 - (void)placeSubviews{}
@@ -58,14 +58,14 @@
         // 设置宽度
         self.mj_w = newSuperview.mj_w;
         // 设置位置
-        self.mj_x = 0;
+        self.mj_x = -_scrollView.mj_insetL;
         
         // 记录UIScrollView
         _scrollView = (UIScrollView *)newSuperview;
         // 设置永远支持垂直弹簧效果
         _scrollView.alwaysBounceVertical = YES;
         // 记录UIScrollView最开始的contentInset
-        _scrollViewOriginalInset = _scrollView.contentInset;
+        _scrollViewOriginalInset = _scrollView.mj_inset;
         
         // 添加监听
         [self addObservers];
@@ -95,7 +95,7 @@
 - (void)removeObservers
 {
     [self.superview removeObserver:self forKeyPath:MJRefreshKeyPathContentOffset];
-    [self.superview removeObserver:self forKeyPath:MJRefreshKeyPathContentSize];;
+    [self.superview removeObserver:self forKeyPath:MJRefreshKeyPathContentSize];
     [self.pan removeObserver:self forKeyPath:MJRefreshKeyPathPanState];
     self.pan = nil;
 }
@@ -135,9 +135,8 @@
 {
     _state = state;
     
-    dispatch_async(dispatch_get_main_queue(), ^{
-        [self setNeedsLayout];
-    });
+    // 加入主队列的目的是等setState:方法调用完毕、设置完文字后再去布局子控件
+    MJRefreshDispatchAsyncOnMainQueue([self setNeedsLayout];)
 }
 
 #pragma mark 进入刷新状态
@@ -151,7 +150,7 @@
     if (self.window) {
         self.state = MJRefreshStateRefreshing;
     } else {
-        // 预发当前正在刷新中时调用本方法使得header insert回置失败
+        // 预防正在刷新中时，调用本方法使得header inset回置失败
         if (self.state != MJRefreshStateRefreshing) {
             self.state = MJRefreshStateWillRefresh;
             // 刷新(预防从另一个控制器回到这个控制器的情况，回来要重新刷新一下)
@@ -160,7 +159,7 @@
     }
 }
 
-- (void)beginRefreshingWithCompletionBlock:(void (^)())completionBlock
+- (void)beginRefreshingWithCompletionBlock:(void (^)(void))completionBlock
 {
     self.beginRefreshingCompletionBlock = completionBlock;
     
@@ -170,10 +169,10 @@
 #pragma mark 结束刷新状态
 - (void)endRefreshing
 {
-    self.state = MJRefreshStateIdle;
+    MJRefreshDispatchAsyncOnMainQueue(self.state = MJRefreshStateIdle;)
 }
 
-- (void)endRefreshingWithCompletionBlock:(void (^)())completionBlock
+- (void)endRefreshingWithCompletionBlock:(void (^)(void))completionBlock
 {
     self.endRefreshingCompletionBlock = completionBlock;
     
@@ -225,7 +224,7 @@
 #pragma mark - 内部方法
 - (void)executeRefreshingCallback
 {
-    dispatch_async(dispatch_get_main_queue(), ^{
+    MJRefreshDispatchAsyncOnMainQueue({
         if (self.refreshingBlock) {
             self.refreshingBlock();
         }
@@ -235,7 +234,7 @@
         if (self.beginRefreshingCompletionBlock) {
             self.beginRefreshingCompletionBlock();
         }
-    });
+    })
 }
 @end
 
@@ -264,8 +263,8 @@
 #else
         
         stringWidth = [self.text sizeWithFont:self.font
-                             constrainedToSize:size
-                                 lineBreakMode:NSLineBreakByCharWrapping].width;
+                            constrainedToSize:size
+                                lineBreakMode:NSLineBreakByCharWrapping].width;
 #endif
     }
     return stringWidth;

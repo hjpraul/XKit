@@ -23,7 +23,6 @@
 -(void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
     [self setNeedsStatusBarAppearanceUpdate];
-    [aliPageHitHelper pageAppear:self];
     // 系统返回手势
     if ([self.navigationController respondsToSelector:@selector(interactivePopGestureRecognizer)]) {
         if ([self.navigationController.viewControllers count] > 1) {

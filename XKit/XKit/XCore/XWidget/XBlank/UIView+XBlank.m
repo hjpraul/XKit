@@ -106,7 +106,7 @@
     UIImage *image = nil;
     switch (type) {
         case kBlankTypeLoading:{
-            image = [UIImage sd_animatedGIFNamed:@"loading"];//[UIImage animatedImageNamed:@"blank_loading_gif" duration:0.8];
+            image = [UIImage animatedImageNamed:@"blank_loading_gif" duration:0.8];
         }break;
         case kBlankTypeFailed:{
             image = [UIImage imageNamed:@"空白提示-加载失败"];

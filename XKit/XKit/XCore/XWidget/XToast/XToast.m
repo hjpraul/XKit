@@ -7,6 +7,7 @@
 //
 
 #import "XToast.h"
+#import <IQKeyboardManager/IQKeyboardManager.h>
 
 #define DISPLAY_DURATION (3.0f)
 #define FONT_SIZE   (14)
