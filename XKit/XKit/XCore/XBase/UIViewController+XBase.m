@@ -7,6 +7,7 @@
 //
 
 #import "UIViewController+XBase.h"
+#import "UIImage+XCreate.h"
 
 @implementation UIViewController (XBase)
 #pragma mark - Public Method
@@ -150,7 +151,7 @@
     }
 
     [self setLeftBarByTitle:nil
-                      image:[UIImage imageNamed:@"nav_back_white"]
+                      image:[UIImage x_imageWithColor:[UIColor redColor] size:CGSizeMake(20, 20)]//[UIImage imageNamed:@"nav_back_white"]
                     bgImage:nil
                  leftOffset:-16.0f
                        size:CGSizeMake(44, 44)

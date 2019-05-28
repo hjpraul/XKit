@@ -40,6 +40,10 @@
             UINavigationController *nav = [[UIStoryboard storyboardWithName:@"TestLoading" bundle:[NSBundle mainBundle]] instantiateInitialViewController];
             [self.navigationController presentViewController:nav animated:YES completion:nil];
         }break;
+        case 2:{
+            UINavigationController *nav = [[UIStoryboard storyboardWithName:@"TestButtons" bundle:[NSBundle mainBundle]] instantiateInitialViewController];
+            [self.navigationController presentViewController:nav animated:YES completion:nil];
+        }break;
 
         default:
             break;

@@ -10,16 +10,18 @@
 
 @implementation XExchangeButton
 
-- (void)drawRect:(CGRect)rect {
-    [super drawRect:rect];
-    self.imageEdgeInsets = UIEdgeInsetsMake(0,
-                                            self.titleLabel.x_width+_space/2,
-                                            0,
-                                            -(self.titleLabel.x_width+_space/2));
-    self.titleEdgeInsets = UIEdgeInsetsMake(0,
-                                            -(self.imageView.x_width+_space/2),
-                                            0,
-                                            (self.imageView.x_width+_space/2));
+- (void)awakeFromNib {
+    [super awakeFromNib];
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        self.imageEdgeInsets = UIEdgeInsetsMake(0,
+                                                self.titleLabel.x_width+self.space/2,
+                                                0,
+                                                -(self.titleLabel.x_width+self.space/2));
+        self.titleEdgeInsets = UIEdgeInsetsMake(0,
+                                                -(self.imageView.x_width+self.space/2),
+                                                0,
+                                                (self.imageView.x_width+self.space/2));
+    });
 }
 
 @end

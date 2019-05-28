@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		59E8459D1B0B1BF836896F74 /* libPods-XKit.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C2A419EC575FDB6B857CFBB6 /* libPods-XKit.a */; };
+		7817192E2191BA5600CEC7D6 /* TestButtons.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7817192D2191BA5600CEC7D6 /* TestButtons.storyboard */; };
+		781719312191BA9900CEC7D6 /* TestButtonsVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 781719302191BA9900CEC7D6 /* TestButtonsVC.m */; };
 		787584491D58E84C00CCB6C2 /* icon_loading_failed@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 787584461D58E84C00CCB6C2 /* icon_loading_failed@2x.png */; };
 		7875844A1D58E84C00CCB6C2 /* icon_loading_info@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 787584471D58E84C00CCB6C2 /* icon_loading_info@2x.png */; };
 		7875844B1D58E84C00CCB6C2 /* icon_loading_success@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 787584481D58E84C00CCB6C2 /* icon_loading_success@2x.png */; };
@@ -79,6 +81,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		7817192D2191BA5600CEC7D6 /* TestButtons.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = TestButtons.storyboard; sourceTree = "<group>"; };
+		7817192F2191BA9900CEC7D6 /* TestButtonsVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = TestButtonsVC.h; path = /Users/hejpraul/Documents/CustomerSpace/iOSWorkSpace/XKit/XKit/XKit/UI/Main/TestButtonsVC.h; sourceTree = "<absolute>"; };
+		781719302191BA9900CEC7D6 /* TestButtonsVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = TestButtonsVC.m; path = /Users/hejpraul/Documents/CustomerSpace/iOSWorkSpace/XKit/XKit/XKit/UI/Main/TestButtonsVC.m; sourceTree = "<absolute>"; };
 		787584461D58E84C00CCB6C2 /* icon_loading_failed@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_loading_failed@2x.png"; sourceTree = "<group>"; };
 		787584471D58E84C00CCB6C2 /* icon_loading_info@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_loading_info@2x.png"; sourceTree = "<group>"; };
 		787584481D58E84C00CCB6C2 /* icon_loading_success@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_loading_success@2x.png"; sourceTree = "<group>"; };
@@ -301,7 +306,6 @@
 				78AF9E971D2FF71C003170F4 /* Info.plist */,
 				78AF9F791D32464D003170F4 /* PrefixHeader.pch */,
 				78AF9F0A1D323F19003170F4 /* XCore */,
-				78EEDF8C1D3BC8AE000B17B9 /* Logic */,
 				78EEDF8D1D3BC8AE000B17B9 /* UI */,
 				78AF9E861D2FF71C003170F4 /* Supporting Files */,
 			);
@@ -482,13 +486,6 @@
 			path = XToast;
 			sourceTree = "<group>";
 		};
-		78EEDF8C1D3BC8AE000B17B9 /* Logic */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Logic;
-			sourceTree = "<group>";
-		};
 		78EEDF8D1D3BC8AE000B17B9 /* UI */ = {
 			isa = PBXGroup;
 			children = (
@@ -517,6 +514,9 @@
 				78EEDF951D3BE80A000B17B9 /* TestLoading.storyboard */,
 				78EEDF9A1D3BEAC4000B17B9 /* TestLoadingVC.h */,
 				78EEDF9B1D3BEAC4000B17B9 /* TestLoadingVC.m */,
+				7817192D2191BA5600CEC7D6 /* TestButtons.storyboard */,
+				7817192F2191BA9900CEC7D6 /* TestButtonsVC.h */,
+				781719302191BA9900CEC7D6 /* TestButtonsVC.m */,
 			);
 			path = Main;
 			sourceTree = "<group>";
@@ -630,6 +630,7 @@
 			files = (
 				787584631D5A2B9900CCB6C2 /* blank_loading_gif2.png in Resources */,
 				78EEDF941D3BCF92000B17B9 /* Main.storyboard in Resources */,
+				7817192E2191BA5600CEC7D6 /* TestButtons.storyboard in Resources */,
 				78AF9F7B1D329462003170F4 /* XLoadingView.xib in Resources */,
 				78EEDF901D3BC8C5000B17B9 /* Splash.storyboard in Resources */,
 				7875844A1D58E84C00CCB6C2 /* icon_loading_info@2x.png in Resources */,
@@ -740,6 +741,7 @@
 				78AF9F751D323F1A003170F4 /* XLoadingView.m in Sources */,
 				78AF9F621D323F1A003170F4 /* NSString+XFormat.m in Sources */,
 				78AF9F5E1D323F1A003170F4 /* NSDate+XComponent.m in Sources */,
+				781719312191BA9900CEC7D6 /* TestButtonsVC.m in Sources */,
 				78AF9F6C1D323F1A003170F4 /* UIView+XSize.m in Sources */,
 				9EF04A192191805D002A7DF2 /* NSObject+DecimalNumber.m in Sources */,
 				78AF9F671D323F1A003170F4 /* UIImage+XCreate.m in Sources */,

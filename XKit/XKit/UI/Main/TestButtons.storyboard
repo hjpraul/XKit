@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" colorMatched="YES" initialViewController="P5N-xu-epf">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Test ButtonsVC-->
+        <scene sceneID="jwj-Th-vSz">
+            <objects>
+                <viewController storyboardIdentifier="TestButtonsVC" id="P5N-xu-epf" customClass="TestButtonsVC" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="GKx-gP-Kuu"/>
+                        <viewControllerLayoutGuide type="bottom" id="OK1-IQ-WMW"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="v3V-nm-0fn">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gVh-Fh-WLF" customClass="XUpDownButton">
+                                <rect key="frame" x="147.5" y="253.5" width="80" height="60"/>
+                                <color key="backgroundColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="60" id="Hfu-V0-hwH"/>
+                                    <constraint firstAttribute="width" constant="80" id="roK-Zd-JAF"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                <state key="normal" title="上下" image="icon_mine_tv_profile">
+                                    <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="space">
+                                        <real key="value" value="8"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oLu-YX-FyK" customClass="XExchangeButton">
+                                <rect key="frame" x="147.5" y="353.5" width="80" height="60"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="60" id="0cR-o4-IMH"/>
+                                    <constraint firstAttribute="width" constant="80" id="PMi-BW-XkF"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                <state key="normal" title="左右" image="icon_mine_tv_profile">
+                                    <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="oLu-YX-FyK" firstAttribute="centerX" secondItem="v3V-nm-0fn" secondAttribute="centerX" id="1Vx-wR-Ihk"/>
+                            <constraint firstItem="gVh-Fh-WLF" firstAttribute="centerX" secondItem="v3V-nm-0fn" secondAttribute="centerX" id="Kpn-a7-dNQ"/>
+                            <constraint firstItem="oLu-YX-FyK" firstAttribute="top" secondItem="v3V-nm-0fn" secondAttribute="centerY" constant="20" id="kCl-U4-Cw7"/>
+                            <constraint firstItem="gVh-Fh-WLF" firstAttribute="bottom" secondItem="v3V-nm-0fn" secondAttribute="centerY" constant="-20" id="mIM-Y2-hXr"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="updownBtnHeight" destination="Hfu-V0-hwH" id="UyB-JK-KXl"/>
+                        <outlet property="updownBtnWidth" destination="roK-Zd-JAF" id="gqm-GA-4av"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="zUS-7c-ypr" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-369.375" y="81.151666666666657"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="icon_mine_tv_profile" width="27" height="27"/>
+    </resources>
+</document>
